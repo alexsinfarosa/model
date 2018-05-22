@@ -144,6 +144,13 @@ export default class ParamsStore {
     fetchData(params).then(res => (this.data = res));
     this.isLoading = false;
   };
+
+  get dataForTable() {
+    const todayIdx = this.data.findIndex(obj =>
+      isSameDay(new Date(obj.date), new Date(this.dateOfInterest))
+    );
+    return this.data.slice(todayIdx - 3, todayIdx + 6);
+  }
 }
 
 decorate(ParamsStore, {

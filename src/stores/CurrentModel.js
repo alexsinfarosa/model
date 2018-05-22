@@ -43,18 +43,18 @@ export default class CurrentModel {
         p["cdd"] = cdd.toFixed(0);
       } else {
         missingDays.push(date);
+        p["min"] = "N/A";
+        p["max"] = "N/A";
+        p["avg"] = "N/A";
         p["dd"] = "N/A";
         p["cdd"] = "N/A";
-        p["min"] = "N/A";
-        p["avg"] = "N/A";
-        p["max"] = "N/A";
       }
       return { p, missingDays };
     });
   }
 
   get dataForTable() {
-    // return this.modelData.slice(-6);
+    return this.modelData.slice(-6);
   }
 }
 

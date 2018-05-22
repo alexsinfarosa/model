@@ -68,6 +68,7 @@ class GDDTable extends Component {
   render() {
     const { classes } = this.props;
     const {
+      dataForTable,
       isLoading,
       dateOfInterest,
       missingDays
