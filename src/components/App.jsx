@@ -10,12 +10,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
+import Modal from "@material-ui/core/Modal";
 
 // components
 import LeftPanel from "./LeftPanel";
 // import PestManagementTable from "./PestManagementTable";
 // import GDDTable from "./GDDTable";
-// import USMap from "./USMap";
+import USMap from "./USMap";
 import Footer from "./Footer";
 import Disclaimer from "./Disclaimer";
 
@@ -166,7 +167,7 @@ class App extends Component {
         </main>
 
         {/* US map */}
-        {/**<Modal
+        <Modal
           aria-labelledby="US map"
           aria-describedby="US map"
           disableAutoFocus={true}
@@ -174,8 +175,7 @@ class App extends Component {
           onClose={this.toggleModal}
           style={{
             width: "100%",
-            height: "50%",
-            margin: "100px auto"
+            height: "80%"
           }}
         >
           <div style={{ width: "100%", height: "100%" }}>
@@ -186,7 +186,7 @@ class App extends Component {
               closeDrawer={this.closeDrawer}
             />
           </div>
-        </Modal>**/}
+        </Modal>
       </div>
     );
   }
