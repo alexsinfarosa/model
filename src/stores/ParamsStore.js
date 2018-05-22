@@ -6,12 +6,11 @@ import axios from "axios";
 import { idAdjustment, vXDef } from "../utils/utils";
 
 // date-fns
-import { format, startOfYear, addDays, getYear, isSameDay } from "date-fns/esm";
+import { format, getYear, isSameDay, startOfHour } from "date-fns/esm";
 
 // fetch
 import fetchData from "../utils/fetchData";
-import cleanFetchedData from "../utils/cleanFetchedData";
-import currentModel from "../utils/currentModel";
+// import currentModel from "../utils/currentModel";
 
 // const
 const url = `${
@@ -35,13 +34,14 @@ export default class ParamsStore {
       () =>
         this.stationID === "" || !this.dateOfInterest
           ? null
-          : this.setData(this.params)
+          : this.loadData(this.params)
     );
   }
 
+  // logic --------------------------------------------------------------------------------
   isLoading = false;
 
-  //   state
+  //   state ------------------------------------------------------------------------------
   postalCode = "ALL";
   setPostalCode = e => {
     this.postalCode = e.target.value;
@@ -51,15 +51,11 @@ export default class ParamsStore {
     return allStates.find(state => state.postalCode === this.postalCode);
   }
 
-  //   station
+  //   station -----------------------------------------------------------------------------
   stationID = "";
   setStationID = e => {
-    console.log(e);
     this.stationID = e.target.value;
-    const station = this.stations.find(
-      station => station.id === e.target.value
-    );
-    this.postalCode = station.state;
+    this.postalCode = this.station.state;
   };
   get station() {
     return this.stations.find(station => station.id === this.stationID);
@@ -87,16 +83,17 @@ export default class ParamsStore {
       : this.stations.filter(station => station.state === this.postalCode);
   }
 
-  //   date of interest
-  dateOfInterest = new Date();
-  setDateOfInterest = d => {
-    this.dateOfInterest = d;
-    const yearDateOfInterest = getYear(d);
-    const yearBioFix = getYear(this.bioFix);
-    return yearBioFix === yearDateOfInterest ? null : (this.bioFix = null);
+  setStateStationFromMap = station => {
+    this.postalCode = station.state;
+    this.stationID = station.id;
   };
 
-  //   localstorage
+  //   date of interest -------------------------------------------------------------------
+  dateOfInterest = new Date();
+  sdate = `${getYear(this.dateOfInterest) - 1}-12-31`;
+  setDateOfInterest = d => (this.dateOfInterest = d);
+
+  //   localstorage ------------------------------------------------------------------------
   writeToLocalstorage = json => {
     localStorage.setItem("newa-blueberry-maggot-model", JSON.stringify(json));
   };
@@ -109,11 +106,11 @@ export default class ParamsStore {
       if (Object.keys(params).length !== 0) {
         this.postalCode = params.postalCode;
         this.stationID = params.stationID;
-        this.dateOfInterest = params.dateOfInterest;
       }
     }
   };
 
+  // params ----------------------------------------------------------------------------------
   get asJson() {
     return {
       postalCode: this.postalCode,
@@ -124,51 +121,29 @@ export default class ParamsStore {
 
   get params() {
     if (this.station) {
-      let edate = this.dateOfInterest;
       return {
         sid: `${idAdjustment(this.station)} ${this.station.network}`,
-        sdate: format(startOfYear(this.dateOfInterest), "YYYY-MM-DD"),
-        edate: format(addDays(edate, 5), "YYYY-MM-DD"),
+        sdate: format(this.sdate, "YYYY-MM-DD"),
+        edate: format(this.dateOfInterest, "YYYY-MM-DD"),
         elems: [{ vX: vXDef[this.station.network]["temp"], prec: 1 }],
-        meta: "tzo"
+        janFirst: `${getYear(this.dateOfInterest)}-01-01 00:00`,
+        dateOfInterest: format(
+          startOfHour(this.dateOfInterest),
+          "YYYY-MM-DD HH:00"
+        )
       };
     }
   }
 
-  setStateStationFromMap = station => {
-    this.postalCode = station.state;
-    this.stationID = station.id;
-  };
-
+  // data model --------------------------------------------------------------------------------
   data = [];
   missingDays = [];
-  setData = async params => {
+  loadData = params => {
     this.isLoading = true;
-
     // fetching data
-    const acisData = await fetchData(params).then(res => res);
-
-    // clean and replacements
-    const cleanedData = await cleanFetchedData(acisData, this.asJson);
-
-    // transform data based on current model
-    const { results, missingDays } = await currentModel(
-      cleanedData,
-      this.asJson
-    );
-
-    // console.log(results);
-    this.data = results;
-    this.missingDays = missingDays;
+    fetchData(params).then(res => (this.data = res));
     this.isLoading = false;
   };
-
-  get dataForTable() {
-    const todayIdx = this.data.findIndex(obj =>
-      isSameDay(new Date(obj.date), new Date(this.dateOfInterest))
-    );
-    return this.data.slice(todayIdx - 3, todayIdx + 6);
-  }
 }
 
 decorate(ParamsStore, {

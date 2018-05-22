@@ -1,35 +1,16 @@
 import axios from "axios";
 import { format, isSameYear, addDays } from "date-fns/esm";
+import cleanFetchedData from "./cleanFetchedData";
 
 const protocol = window.location.protocol;
-const dateFormat = "yyyy-MM-dd";
+const dateFormat = "YYYY-MM-DD";
 
-const handleError = res => {
-  if ("error" in res.data) {
-    let p = {};
-    p.meta = res.data.meta;
-    p.data = [];
-    return p;
-  }
-  // console.log(res.data);
-  return res.data;
-};
-
-// Fetch all stations -------------------------------------------------------------------
-const stationsUrl = `${protocol}//newa2.nrcc.cornell.edu/newaUtil/stateStationList/all`;
-export const fetchAllStations = () => {
-  return axios
-    .get(stationsUrl)
-    .then(res => res.data.stations)
-    .catch(err => console.log("Failed to load all stations", err));
-};
-
-// // Fetch selected station hourly data ---------------------------------------------------
+// Fetch selected station hourly data ---------------------------------------------------
 const url = `${protocol}//data.nrcc.rcc-acis.org/StnData`;
 export const fetchCurrentStationHourlyData = params => {
   return axios
     .post(url, params)
-    .then(res => handleError(res))
+    .then(res => res.data)
     .catch(err => console.log("Failed to load station data ", err));
 };
 
@@ -41,7 +22,7 @@ const fetchSisterStationIdAndNetwork = params => {
   return axios(`${sisterIdNetworkUrl}/${id}/${network}`)
     .then(res => res.data.temp)
     .catch(err =>
-      console.log("Failed to load sister station's id and network", err)
+      console.log("Failed to load sister station id and network", err)
     );
 };
 
@@ -50,8 +31,8 @@ const sisterUrl = `${protocol}//data.nrcc.rcc-acis.org/StnData`;
 export const fetchSisterStationHourlyData = params => {
   return axios
     .post(sisterUrl, params)
-    .then(res => handleError(res))
-    .catch(err => console.log("Failed to load station data ", err));
+    .then(res => res.data)
+    .catch(err => console.log("Failed to load sister station data ", err));
 };
 
 // Fetch forecast hourly data --------------------------------------------------------------
@@ -63,7 +44,7 @@ const fetchHourlyForcestData = params => {
 
   return axios
     .get(`${forecastUrl}/${id}/${network}/temp/${params.sdate}/${plusFiveDays}`)
-    .then(res => handleError(res))
+    .then(res => res.data)
     .catch(err => console.log("Failed to load hourly forecast data", err));
 };
 
@@ -90,16 +71,13 @@ export default async params => {
     results.set("forecast", forecastData.data);
   }
 
-  // handling timezone (tzo)
-  // console.log(currentStation);
-  let tzo = currentStation.meta.tzo;
-  if (currentStation.meta.tzo !== sisterStation.meta.tzo) {
-    tzo = sisterStation.meta.tzo;
-  }
-  results.set("tzo", tzo);
   results.set("currentStn", currentStation.data);
   results.set("sisterStn", sisterStation.data);
 
-  // console.log(results);
-  return results;
+  // clean data
+  // console.log(results, params);
+  const cleaned = cleanFetchedData(results, params);
+
+  // console.log(cleaned);
+  return cleaned;
 };

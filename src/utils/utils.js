@@ -1,3 +1,5 @@
+import { isBefore, addHours, isEqual } from "date-fns/esm";
+
 // MAP ---------------------------------------------------------
 export const matchIconsToStations = (station, state) => {
   const protocol = window.location.protocol;
@@ -180,7 +182,12 @@ export const unflatten = array => {
 };
 
 // Convert Fahrenheit to Celcius
-export const fahrenheitToCelcius = t => ((t - 32) * 5 / 9).toFixed(1);
+export const fahrenheitToCelcius = (t, missing) =>
+  t === missing ? t : ((t - 32) * 5 / 9).toFixed(1);
+
+// Convert Celcius to Fahrenheit
+export const celciusToFahrenheit = (t, missing) =>
+  t === missing ? t : (t * (9 / 5) + 32).toFixed(1);
 
 // Returns average of all the values in array
 export const average = data => {
@@ -190,6 +197,22 @@ export const average = data => {
   //  calculating average
   let results = data.map(e => parseFloat(e));
   return Math.round(results.reduce((acc, val) => acc + val, 0) / data.length);
+};
+
+export const dailyToHourlyDates = (sdate, edate) => {
+  let startDay = new Date(sdate);
+  let endDay = edate;
+
+  let results = [];
+  results.push(startDay);
+
+  while (isBefore(startDay, endDay)) {
+    startDay = addHours(startDay, 1);
+    if (isBefore(startDay, endDay) || isEqual(startDay, endDay)) {
+      results.push(startDay);
+    }
+  }
+  return results;
 };
 
 // This formula is used to calculate the growing degree day
@@ -203,6 +226,8 @@ export const baskervilleEmin = (min, max, base) => {
     const avg = (max + min) / 2;
     const amt = (max - min) / 2;
     const t1 = Math.sin((base - avg) / amt);
-    return (amt * Math.cos(t1) - (base - avg) * (3.14 / 2 - t1)) / 3.14;
+    return avg < 0
+      ? 0
+      : (amt * Math.cos(t1) - (base - avg) * (3.14 / 2 - t1)) / 3.14;
   }
 };

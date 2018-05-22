@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -12,10 +12,13 @@ import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import Modal from "@material-ui/core/Modal";
 
+// spinner
+import { RingLoader } from "react-spinners";
+
 // components
 import LeftPanel from "./LeftPanel";
-// import PestManagementTable from "./PestManagementTable";
-// import GDDTable from "./GDDTable";
+import ManagementTable from "./ManagementTable";
+import GDDTable from "./GDDTable";
 import USMap from "./USMap";
 import Footer from "./Footer";
 import Disclaimer from "./Disclaimer";
@@ -74,13 +77,21 @@ const styles = theme => ({
       fontSize: "100%",
       letterSpacing: 1
     }
+  },
+  centered: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
   }
 });
 
 class App extends Component {
   state = {
     mobileOpen: false,
-    isModalOpen: false
+    isModalOpen: false,
+    loading: true
   };
 
   handleDrawerToggle = () => {
@@ -97,7 +108,9 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-
+    const { station } = this.props.appStore.paramsStore;
+    const { data } = this.props.appStore.currentModel;
+    console.log(data.slice());
     return (
       <div className={classes.root}>
         <AppBar className={classes.appBar}>
@@ -152,19 +165,29 @@ class App extends Component {
         </Hidden>
 
         {/* main content */}
-        <main className={classes.content}>
-          <Fragment>
-            <Typography variant="display1" align="center" gutterBottom>
-              Results for Ciiciio
-            </Typography>
-            <div style={{ flex: 1 }}>
-              {/**!isLoading && <PestManagementTable />**/}
-              {/**<GDDTable />**/}
-              {!false && <Disclaimer />}
-            </div>
-            <Footer />
-          </Fragment>
-        </main>
+        {station && (
+          <main className={classes.content}>
+            {data.length !== 0 ? (
+              <div className={classes.centered}>
+                <Typography variant="display1" align="center" gutterBottom>
+                  Results for {station.name}, {station.state}
+                </Typography>
+                <ManagementTable />
+                <GDDTable />
+                <Disclaimer />
+                <Footer />
+              </div>
+            ) : (
+              <div
+                className={classes.centered}
+                style={{ flexDirection: "row" }}
+              >
+                <Typography variant="caption">LOADING...</Typography>
+                <RingLoader color={"#843EA4"} loading={this.state.loading} />
+              </div>
+            )}
+          </main>
+        )}
 
         {/* US map */}
         <Modal

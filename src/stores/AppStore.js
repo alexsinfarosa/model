@@ -1,9 +1,9 @@
 import ParamsStore from "./ParamsStore";
+import CurrentModel from "./CurrentModel";
 
 export default class AppStore {
-  fetch;
-  constructor(fetcher) {
-    this.fetch = fetcher;
+  constructor() {
     this.paramsStore = new ParamsStore();
+    this.currentModel = new CurrentModel(this);
   }
 }
