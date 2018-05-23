@@ -1,12 +1,15 @@
-import { isSameYear, getHours, startOfDay, endOfDay } from "date-fns/esm";
+import { format, isSameYear, startOfDay, endOfDay } from "date-fns/esm";
 import {
   averageMissingValues,
   flatten,
-  unflatten,
-  dailyToHourlyDates
+  dailyToHourlyDates,
+  dailyToHourlyDates2
 } from "./utils";
 
 export default (acisData, params) => {
+  // tzo
+  const tzo = acisData.get("tzo");
+
   // current station
   const currentStn = acisData.get("currentStn");
 
@@ -26,8 +29,6 @@ export default (acisData, params) => {
     (t, i) => (t === "M" ? sisterStnValues[i] : t)
   );
 
-  replaced = averageMissingValues(replaced);
-
   // if date of interest is in current year
   if (isSameYear(new Date(), new Date(params.dateOfInterest))) {
     const forecast = acisData.get("forecast");
@@ -45,54 +46,59 @@ export default (acisData, params) => {
     replaced = [...replaced, ...onlyForecastDays];
   }
 
-  // Since data comes back as 1am-24am, we need to shift the arry [0,23] one hour forward
-  const firstValue = replaced[23];
-  // Replaced array starts from Jan 1st
-  replaced = [firstValue, ...replaced.slice(24, -1)];
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // shifting data and transforming it to local time
+  // ////////////////////////////////////////////////////////////////////////////////////
+
+  // values go from yyyy-01-01 00:00 to dateOfInterest current hour
+  const values = [replaced[23], ...replaced.slice(24, -1)];
+
+  // dates go from yyyy-01-01 to dateOfInterest (yyyy-mm-dd)
   dates = dates.slice(1); // from Jan 1st
 
-  // split each day is an array of hourly dates. In local time
-  const datesUnflattened = dates.map(date => {
-    return dailyToHourlyDates(startOfDay(date), endOfDay(date));
+  // hourlyDates go from yyyy-01-01 00:00 to dateOfInterest (yyyy-mm-dd 23:00)
+  const hourlyDates = dates
+    .map(date => dailyToHourlyDates2(date))
+    .reduce((acc, results) => [...acc, ...results], []);
+
+  // array of indeces where the hour must be shifted
+  const arrOFIndeces = hourlyDates.map((hour, i) => {
+    const tzoFromDate = parseInt(format(new Date(hour), "Z"), 10);
+    return tzoFromDate !== tzo ? i : null;
   });
 
-  // unflatted arrays of temp values
-  const replacedUnflattened = unflatten(replaced);
+  // removing null values
+  const indices = arrOFIndeces.filter(d => d);
 
+  // the valuesShifted array has the hour shifted
+  const valuesShifted = values.map(
+    (v, i) => (v in indices ? values[i - 1] : v)
+  );
+
+  // generating the array of objects
   const isModelBasedOnHourlyData = false;
   let results = [];
   if (isModelBasedOnHourlyData) {
-    // matches the hourly dates (local time) with the correct value in the arr
-    datesUnflattened.forEach((dayArr, i) => {
-      dayArr.forEach((h, j) => {
-        const time = getHours(h);
-        let p = {};
-        p.date = h;
-        p.temp = replacedUnflattened[i][time];
-        // console.log(p);
-        results.push(p);
-      });
+    hourlyDates.forEach((hour, i) => {
+      let p = {};
+      p["date"] = new Date(hour);
+      p["temp"] = valuesShifted[i];
+      results.push(p);
     });
   } else {
+    let left = 0;
+    let right = 0;
     dates.forEach((date, i) => {
-      let temps = replacedUnflattened[i];
-      const numOfHoursInADay = dailyToHourlyDates(
-        startOfDay(date),
-        endOfDay(date)
-      );
+      const numOfHours = dailyToHourlyDates(startOfDay(date), endOfDay(date))
+        .length;
 
-      if (numOfHoursInADay.length !== 24) {
-        temps = numOfHoursInADay.map(date => {
-          const hour = getHours(date);
-          return temps[hour];
-        });
-      }
+      right = left + numOfHours;
 
       let p = {};
       p["date"] = date;
-      p["temps"] = temps;
+      p["temps"] = valuesShifted.slice(left, right);
 
-      // console.log(p);
+      left += numOfHours;
       results.push(p);
     });
   }

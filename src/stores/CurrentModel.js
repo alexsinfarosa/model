@@ -21,9 +21,8 @@ export default class CurrentModel {
     return this.data.map(obj => {
       const { date, temps } = obj;
       const countMissingValues = temps.filter(t => t === "M").length;
-
+      // console.log(countMissingValues);
       let p = {};
-      p["date"] = date;
 
       if (countMissingValues < 5) {
         const tempsFiltered = temps.filter(t => t !== "M");
@@ -37,20 +36,22 @@ export default class CurrentModel {
         // cumulative degree day
         cdd += dd;
 
-        p["min"] = min.toFixed(2);
-        p["max"] = max.toFixed(2);
-        p["avg"] = avg.toFixed(2);
-        p["dd"] = dd.toFixed(2);
-        p["cdd"] = cdd.toFixed(2);
+        p["date"] = date;
+        p["min"] = min.toFixed(0);
+        p["max"] = max.toFixed(0);
+        p["avg"] = avg.toFixed(0);
+        p["dd"] = dd.toFixed(0);
+        p["cdd"] = cdd.toFixed(0);
       } else {
         missingDays.push(date);
+        p["date"] = date;
         p["min"] = "N/A";
         p["max"] = "N/A";
         p["avg"] = "N/A";
         p["dd"] = "N/A";
         p["cdd"] = "N/A";
       }
-
+      // console.log(p, missingDays);
       return { p, missingDays };
     });
   }

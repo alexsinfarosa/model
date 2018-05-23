@@ -72,6 +72,7 @@ export default async params => {
   }
 
   results.set("currentStn", currentStation.data);
+  results.set("tzo", currentStation.meta.tzo);
   results.set("sisterStn", sisterStation.data);
 
   // clean data

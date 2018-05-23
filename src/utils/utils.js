@@ -1,4 +1,11 @@
-import { isBefore, addHours, isEqual } from "date-fns/esm";
+import {
+  isBefore,
+  addHours,
+  isEqual,
+  startOfDay,
+  endOfDay,
+  getHours
+} from "date-fns/esm";
 
 // MAP ---------------------------------------------------------
 export const matchIconsToStations = (station, state) => {
@@ -200,7 +207,7 @@ export const average = data => {
 };
 
 export const dailyToHourlyDates = (sdate, edate) => {
-  let startDay = new Date(sdate);
+  let startDay = sdate;
   let endDay = edate;
 
   let results = [];
@@ -212,6 +219,17 @@ export const dailyToHourlyDates = (sdate, edate) => {
       results.push(startDay);
     }
   }
+  return results;
+};
+
+export const dailyToHourlyDates2 = date => {
+  const numOfHours = dailyToHourlyDates(startOfDay(date), endOfDay(date));
+  const hoursArr = numOfHours.map(h => getHours(h));
+  let results = hoursArr.map(hour => {
+    if (hour >= 0 && hour <= 9) hour = `0${hour}`;
+    return `${date} ${hour}:00`;
+  });
+  // console.log(results);
   return results;
 };
 

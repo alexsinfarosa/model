@@ -89,7 +89,7 @@ export default class ParamsStore {
   };
 
   //   date of interest -------------------------------------------------------------------
-  dateOfInterest = new Date("2017-11-11");
+  dateOfInterest = new Date("2017-11-30");
   get sdate() {
     return `${getYear(this.dateOfInterest) - 1}-12-31`;
   }
@@ -128,6 +128,7 @@ export default class ParamsStore {
         sdate: this.sdate,
         edate: format(addDays(this.dateOfInterest, 5), "YYYY-MM-DD"),
         elems: [{ vX: vXDef[this.station.network]["temp"], prec: 1 }],
+        meta: "tzo",
         janFirst: `${getYear(this.dateOfInterest)}-01-01 00:00`,
         dateOfInterest: format(
           startOfHour(this.dateOfInterest),
