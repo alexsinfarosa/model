@@ -23,7 +23,7 @@ import USMap from "./USMap";
 import Footer from "./Footer";
 import Disclaimer from "./Disclaimer";
 
-const drawerWidth = 250;
+const drawerWidth = 255;
 const styles = theme => ({
   root: {
     flexGrow: 1,

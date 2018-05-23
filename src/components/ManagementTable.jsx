@@ -20,7 +20,7 @@ import { pestManagement } from "../assets/pestManagement";
 const styles = theme => ({
   root: {
     width: "100%",
-    marginBottom: theme.spacing.unit * 4
+    marginBottom: theme.spacing.unit * 8
   },
   table: {
     minWidth: 700

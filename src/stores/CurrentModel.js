@@ -37,11 +37,11 @@ export default class CurrentModel {
         // cumulative degree day
         cdd += dd;
 
-        p["min"] = min.toFixed(0);
-        p["max"] = max.toFixed(0);
-        p["avg"] = avg.toFixed(0);
-        p["dd"] = dd.toFixed(0);
-        p["cdd"] = cdd.toFixed(0);
+        p["min"] = min.toFixed(2);
+        p["max"] = max.toFixed(2);
+        p["avg"] = avg.toFixed(2);
+        p["dd"] = dd.toFixed(2);
+        p["cdd"] = cdd.toFixed(2);
       } else {
         missingDays.push(date);
         p["min"] = "N/A";
@@ -63,6 +63,7 @@ export default class CurrentModel {
     const dates = this.modelData.map(d => d.p.date);
     const dateOfInterestIdx = dates.indexOf(dateOfInterest);
 
+    // this.modelData.map(d => console.log(d));
     return this.modelData
       .slice(dateOfInterestIdx - 2, dateOfInterestIdx + 6)
       .map(d => d.p);

@@ -184,7 +184,7 @@ class LeftPanel extends Component {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton style={{ marginRight: -8 }}>
+                    <IconButton style={{ marginRight: -10 }}>
                       <Icon>date_range</Icon>
                     </IconButton>
                   </InputAdornment>
