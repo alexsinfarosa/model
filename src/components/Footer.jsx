@@ -6,18 +6,19 @@ import withRoot from "../withRoot";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
+import Hidden from "@material-ui/core/Hidden";
 
 import Acknowledgment from "./Acknowledgment";
 
 const styles = theme => ({
   footer: {
-    width: "100%",
-    flex: "none",
-    marginTop: theme.spacing.unit * 8,
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
-    height: "10vh",
+    height: 150,
+    // background: "white",
+    margin: 0,
+    padding: 0,
     borderTop: "1px solid #E7E7E7"
   },
   button: {
@@ -39,20 +40,52 @@ class Footer extends Component {
     const { classes } = this.props;
     return (
       <Fragment>
-        <Typography variant="caption" className={classes.footer}>
-          <Button className={classes.button} onClick={this.toggleModal}>
-            ACKNOWLEDGMENT
-          </Button>
-          <Button className={classes.button}>MORE INFO</Button>
-          <Button
-            className={classes.button}
-            href="http://newa.cornell.edu/"
-            target="_blank"
-            rel="noopener noreferrer"
+        <Hidden only="xs">
+          <div className={classes.footer}>
+            <Typography variant="caption" style={{ margin: 0, padding: 0 }}>
+              <Button className={classes.button}>MORE INFO</Button>
+              <span> | </span>
+              <Button className={classes.button} onClick={this.toggleModal}>
+                ACKNOWLEDGMENT
+              </Button>
+              <span> | </span>
+              <Button
+                className={classes.button}
+                href="http://newa.cornell.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                NEWA
+              </Button>
+            </Typography>
+          </div>
+        </Hidden>
+
+        <Hidden smUp>
+          <div
+            className={classes.footer}
+            style={{ flexDirection: "column", margin: 0, padding: 0 }}
           >
-            NEWA
-          </Button>
-        </Typography>
+            <Typography variant="caption">
+              <Button className={classes.button}>MORE INFO</Button>
+            </Typography>
+            <Typography variant="caption">
+              <Button className={classes.button} onClick={this.toggleModal}>
+                ACKNOWLEDGMENT
+              </Button>
+            </Typography>
+            <Typography variant="caption">
+              <Button
+                className={classes.button}
+                href="http://newa.cornell.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                NEWA
+              </Button>
+            </Typography>
+          </div>
+        </Hidden>
 
         {/* Acknowledgment */}
         <Modal

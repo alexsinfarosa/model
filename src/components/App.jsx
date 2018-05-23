@@ -27,13 +27,12 @@ const drawerWidth = 250;
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    height: "100vh",
     zIndex: 1,
     overflow: "hidden",
     position: "relative",
     display: "flex",
-    width: "100%",
-    height: "100vh",
-    backgroundColor: "#E7ECF0"
+    width: "100%"
   },
   appBar: {
     position: "absolute",
@@ -42,6 +41,7 @@ const styles = theme => ({
       width: `calc(100% - ${drawerWidth}px)`
     }
   },
+  toolbar: theme.mixins.toolbar,
   navIconHide: {
     [theme.breakpoints.up("md")]: {
       display: "none"
@@ -49,13 +49,15 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+
     [theme.breakpoints.up("md")]: {
       position: "relative"
     }
   },
   content: {
-    display: "flex",
-    flex: 1,
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 2,
     overflowY: "auto"
   },
   link: {
@@ -162,27 +164,35 @@ class App extends Component {
         {/* main content */}
         {station && (
           <main className={classes.content}>
-            {data.length !== 0 ? (
-              <div style={{ flex: 1 }}>
-                <Typography variant="display1" align="center" gutterBottom>
-                  Results for {station.name}, {station.state}
-                </Typography>
-                <div className={classes.centered}>
-                  <ManagementTable />
-                  <GDDTable />
-                  <Disclaimer />
+            <div
+              style={{
+                maxWidth: 1200,
+                margin: "0 auto"
+              }}
+            >
+              <div className={classes.toolbar} />
+              {data.length !== 0 ? (
+                <div>
+                  <Typography variant="display1" align="center" gutterBottom>
+                    Results for {station.name}, {station.state}
+                  </Typography>
+                  <div style={{ flex: 1 }}>
+                    <ManagementTable />
+                    <GDDTable />
+                    <Disclaimer />
+                  </div>
                   <Footer />
                 </div>
-              </div>
-            ) : (
-              <div
-                className={classes.centered}
-                style={{ flexDirection: "row" }}
-              >
-                <Typography variant="caption">LOADING...</Typography>
-                <RingLoader color={"#843EA4"} loading={this.state.loading} />
-              </div>
-            )}
+              ) : (
+                <div
+                  className={classes.centered}
+                  style={{ flexDirection: "row" }}
+                >
+                  <Typography variant="caption">LOADING...</Typography>
+                  <RingLoader color={"#843EA4"} loading={this.state.loading} />
+                </div>
+              )}
+            </div>
           </main>
         )}
 

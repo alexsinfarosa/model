@@ -9,7 +9,8 @@ const styles = theme => ({
   root: {
     width: "100%",
     maxWidth: 700,
-    margin: "0 auto"
+    margin: "0 auto",
+    marginBottom: theme.spacing.unit * 8
   }
 });
 
