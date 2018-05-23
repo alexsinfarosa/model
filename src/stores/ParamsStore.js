@@ -89,7 +89,7 @@ export default class ParamsStore {
   };
 
   //   date of interest -------------------------------------------------------------------
-  dateOfInterest = new Date("2017-11-30");
+  dateOfInterest = new Date();
   get sdate() {
     return `${getYear(this.dateOfInterest) - 1}-12-31`;
   }

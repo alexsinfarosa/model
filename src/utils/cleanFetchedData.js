@@ -2,8 +2,8 @@ import { format, isSameYear, startOfDay, endOfDay } from "date-fns/esm";
 import {
   averageMissingValues,
   flatten,
-  dailyToHourlyDates,
-  dailyToHourlyDates2
+  dailyToHourlyDatesLST,
+  dailyToHourlyDates
 } from "./utils";
 
 export default (acisData, params) => {
@@ -58,7 +58,7 @@ export default (acisData, params) => {
 
   // hourlyDates go from yyyy-01-01 00:00 to dateOfInterest (yyyy-mm-dd 23:00)
   const hourlyDates = dates
-    .map(date => dailyToHourlyDates2(date))
+    .map(date => dailyToHourlyDates(date))
     .reduce((acc, results) => [...acc, ...results], []);
 
   // array of indeces where the hour must be shifted
@@ -89,7 +89,7 @@ export default (acisData, params) => {
     let left = 0;
     let right = 0;
     dates.forEach((date, i) => {
-      const numOfHours = dailyToHourlyDates(startOfDay(date), endOfDay(date))
+      const numOfHours = dailyToHourlyDatesLST(startOfDay(date), endOfDay(date))
         .length;
 
       right = left + numOfHours;

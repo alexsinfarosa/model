@@ -206,7 +206,7 @@ export const average = data => {
   return Math.round(results.reduce((acc, val) => acc + val, 0) / data.length);
 };
 
-export const dailyToHourlyDates = (sdate, edate) => {
+export const dailyToHourlyDatesLST = (sdate, edate) => {
   let startDay = sdate;
   let endDay = edate;
 
@@ -222,8 +222,8 @@ export const dailyToHourlyDates = (sdate, edate) => {
   return results;
 };
 
-export const dailyToHourlyDates2 = date => {
-  const numOfHours = dailyToHourlyDates(startOfDay(date), endOfDay(date));
+export const dailyToHourlyDates = date => {
+  const numOfHours = dailyToHourlyDatesLST(startOfDay(date), endOfDay(date));
   const hoursArr = numOfHours.map(h => getHours(h));
   let results = hoursArr.map(hour => {
     if (hour >= 0 && hour <= 9) hour = `0${hour}`;
