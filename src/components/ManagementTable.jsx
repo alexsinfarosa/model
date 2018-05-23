@@ -52,7 +52,7 @@ class ManagementTable extends Component {
     const { dataForTable } = this.props.appStore.currentModel;
 
     let cdd;
-    if (dataForTable) {
+    if (dataForTable.length !== 0) {
       cdd = dataForTable[2].cdd;
     }
     let status;

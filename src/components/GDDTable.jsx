@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // date
-import { format, isSameDay, getYear, differenceInDays } from "date-fns/esm";
+import { format, isSameDay, differenceInDays } from "date-fns/esm";
 
 // styles
 const styles = theme => ({

@@ -6,7 +6,7 @@ import axios from "axios";
 import { idAdjustment, vXDef } from "../utils/utils";
 
 // date-fns
-import { format, getYear, isSameDay, startOfHour } from "date-fns/esm";
+import { format, getYear, startOfHour, addDays } from "date-fns/esm";
 
 // fetch
 import fetchData from "../utils/fetchData";
@@ -90,7 +90,9 @@ export default class ParamsStore {
 
   //   date of interest -------------------------------------------------------------------
   dateOfInterest = new Date();
-  sdate = `${getYear(this.dateOfInterest) - 1}-12-31`;
+  get sdate() {
+    return `${getYear(this.dateOfInterest) - 1}-12-31`;
+  }
   setDateOfInterest = d => (this.dateOfInterest = d);
 
   //   localstorage ------------------------------------------------------------------------
@@ -123,8 +125,8 @@ export default class ParamsStore {
     if (this.station) {
       return {
         sid: `${idAdjustment(this.station)} ${this.station.network}`,
-        sdate: format(this.sdate, "YYYY-MM-DD"),
-        edate: format(this.dateOfInterest, "YYYY-MM-DD"),
+        sdate: this.sdate,
+        edate: format(addDays(this.dateOfInterest, 5), "YYYY-MM-DD"),
         elems: [{ vX: vXDef[this.station.network]["temp"], prec: 1 }],
         janFirst: `${getYear(this.dateOfInterest)}-01-01 00:00`,
         dateOfInterest: format(
@@ -139,18 +141,12 @@ export default class ParamsStore {
   data = [];
   missingDays = [];
   loadData = params => {
+    this.data = [];
     this.isLoading = true;
     // fetching data
     fetchData(params).then(res => (this.data = res));
     this.isLoading = false;
   };
-
-  get dataForTable() {
-    const todayIdx = this.data.findIndex(obj =>
-      isSameDay(new Date(obj.date), new Date(this.dateOfInterest))
-    );
-    return this.data.slice(todayIdx - 3, todayIdx + 6);
-  }
 }
 
 decorate(ParamsStore, {
@@ -165,6 +161,7 @@ decorate(ParamsStore, {
   setStations: action,
   filteredStationList: computed,
   dateOfInterest: observable,
+  sdate: computed,
   setDateOfInterest: action,
   asJson: computed,
   readFromLocalstorage: action,
@@ -172,6 +169,5 @@ decorate(ParamsStore, {
   setStateStationFromMap: action,
   data: observable,
   missingDays: observable,
-  setData: action,
-  dataForTable: computed
+  setData: action
 });

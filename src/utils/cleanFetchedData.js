@@ -29,9 +29,9 @@ export default (acisData, params) => {
   replaced = averageMissingValues(replaced);
 
   // if date of interest is in current year
-  if (isSameYear(new Date(), new Date(params.edate))) {
+  if (isSameYear(new Date(), new Date(params.dateOfInterest))) {
     const forecast = acisData.get("forecast");
-    dates = forecast.map(arr => arr[0]);
+    // dates = forecast.map(arr => arr[0]);
 
     const forecastValues = flatten(forecast.map(arr => arr[1]));
     const onlyForecastDays = forecastValues.slice(-120).map(t => t.toString());

@@ -65,7 +65,7 @@ export default async params => {
   sisParams.sid = sisterStationIdAndNetwork;
   const sisterStation = await fetchSisterStationHourlyData(sisParams);
 
-  if (isSameYear(new Date(), new Date(params.edate))) {
+  if (isSameYear(new Date(), new Date(params.dateOfInterest))) {
     // get forecast hourly data
     const forecastData = await fetchHourlyForcestData(params);
     results.set("forecast", forecastData.data);

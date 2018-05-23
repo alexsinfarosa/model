@@ -1,5 +1,6 @@
 import { decorate, computed } from "mobx";
 import { baskervilleEmin } from "../utils/utils";
+import { format } from "date-fns/esm";
 
 export default class CurrentModel {
   paramsStore;
@@ -14,10 +15,10 @@ export default class CurrentModel {
 
   // current model ---------------------------------------------------------------
   get modelData() {
+    const base = 50;
+    let cdd = 0;
+    let missingDays = [];
     return this.data.map(obj => {
-      const base = 50;
-      let cdd = 0;
-      let missingDays = [];
       const { date, temps } = obj;
       const countMissingValues = temps.filter(t => t === "M").length;
 
@@ -49,12 +50,22 @@ export default class CurrentModel {
         p["dd"] = "N/A";
         p["cdd"] = "N/A";
       }
+
       return { p, missingDays };
     });
   }
 
   get dataForTable() {
-    return this.modelData.slice(-8).map(d => d.p);
+    const dateOfInterest = format(
+      this.paramsStore.params.dateOfInterest,
+      "YYYY-MM-DD"
+    );
+    const dates = this.modelData.map(d => d.p.date);
+    const dateOfInterestIdx = dates.indexOf(dateOfInterest);
+
+    return this.modelData
+      .slice(dateOfInterestIdx - 2, dateOfInterestIdx + 5)
+      .map(d => d.p);
   }
 
   get missingDays() {
