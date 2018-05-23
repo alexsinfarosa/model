@@ -73,14 +73,10 @@ const styles = theme => ({
     }
   },
   centered: {
-    flex: 1,
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    margin: "0 auto",
-    maxWidth: 1200,
-    padding: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 1
   }
 });
 
@@ -173,7 +169,12 @@ class App extends Component {
               <div className={classes.toolbar} />
               {data.length !== 0 ? (
                 <div>
-                  <Typography variant="display1" align="center" gutterBottom>
+                  <Typography
+                    variant="display1"
+                    align="center"
+                    gutterBottom
+                    style={{ marginTop: 16, marginBottom: 32 }}
+                  >
                     Results for {station.name}, {station.state}
                   </Typography>
                   <div style={{ flex: 1 }}>
@@ -184,10 +185,7 @@ class App extends Component {
                   <Footer />
                 </div>
               ) : (
-                <div
-                  className={classes.centered}
-                  style={{ flexDirection: "row" }}
-                >
+                <div className={classes.centered}>
                   <Typography variant="caption">LOADING...</Typography>
                   <RingLoader color={"#843EA4"} loading={this.state.loading} />
                 </div>

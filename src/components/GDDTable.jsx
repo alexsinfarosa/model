@@ -108,10 +108,7 @@ class GDDTable extends Component {
                       borderRight: "1px solid #E0E0E0"
                     }}
                   >
-                    <div>Date</div>
-                    <div>
-                      <small>({getYear(dateOfInterest)})</small>
-                    </div>
+                    <div>DATE</div>
                   </TableCell>
                   <TableCell
                     style={{
@@ -121,39 +118,36 @@ class GDDTable extends Component {
                     }}
                     colSpan={2}
                   >
-                    <div>Degree Days (base 50 ˚F) BE</div>
-                    <div>
-                      <small>Accumulation from</small>
-                    </div>
+                    <div>DEGREE DAYS (BASE 50 ˚F) BE</div>
                   </TableCell>
                   <TableCell
                     className={classes.isMobile}
                     style={{ textAlign: "center" }}
                     colSpan={3}
                   >
-                    Temperature (˚F)
+                    TEMPERATURE (˚F)
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell className={classes.tableCell} numeric>
-                    Daily
+                    DAILY
                   </TableCell>
                   <TableCell
                     className={classes.tableCell}
                     style={{ borderRight: "1px solid #E0E0E0" }}
                     numeric
                   >
-                    Jan 1
+                    FROM JAN 1st
                   </TableCell>
                   <TableCell className={classes.isMobile} numeric>
-                    Min
+                    MIN
                   </TableCell>
                   <TableCell className={classes.isMobile} numeric>
-                    Avg
+                    AVG
                   </TableCell>
                   <TableCell className={classes.isMobile} numeric>
-                    Max
+                    MAX
                   </TableCell>
                 </TableRow>
               </TableHead>
