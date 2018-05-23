@@ -64,7 +64,7 @@ export default class CurrentModel {
     const dateOfInterestIdx = dates.indexOf(dateOfInterest);
 
     return this.modelData
-      .slice(dateOfInterestIdx - 2, dateOfInterestIdx + 5)
+      .slice(dateOfInterestIdx - 2, dateOfInterestIdx + 6)
       .map(d => d.p);
   }
 
