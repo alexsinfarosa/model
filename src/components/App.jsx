@@ -54,16 +54,8 @@ const styles = theme => ({
     }
   },
   content: {
-    flex: 1,
-    width: "100%",
     display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#E7ECF0",
-    paddingLeft: theme.spacing.unit * 1.5,
-    paddingRight: theme.spacing.unit * 1.5,
-    paddingTop: theme.spacing.unit * 8,
-    margin: "0 auto",
-    marginTop: theme.spacing.unit * 4,
+    flex: 1,
     overflowY: "auto"
   },
   link: {
@@ -79,11 +71,14 @@ const styles = theme => ({
     }
   },
   centered: {
+    flex: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    flex: 1
+    margin: "0 auto",
+    maxWidth: 1200,
+    padding: theme.spacing.unit * 2
   }
 });
 
@@ -110,7 +105,7 @@ class App extends Component {
     const { classes } = this.props;
     const { station } = this.props.appStore.paramsStore;
     const { data } = this.props.appStore.currentModel;
-    console.log(data.slice());
+
     return (
       <div className={classes.root}>
         <AppBar className={classes.appBar}>
@@ -168,14 +163,16 @@ class App extends Component {
         {station && (
           <main className={classes.content}>
             {data.length !== 0 ? (
-              <div className={classes.centered}>
+              <div style={{ flex: 1 }}>
                 <Typography variant="display1" align="center" gutterBottom>
                   Results for {station.name}, {station.state}
                 </Typography>
-                <ManagementTable />
-                <GDDTable />
-                <Disclaimer />
-                <Footer />
+                <div className={classes.centered}>
+                  <ManagementTable />
+                  <GDDTable />
+                  <Disclaimer />
+                  <Footer />
+                </div>
               </div>
             ) : (
               <div

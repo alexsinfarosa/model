@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 
 // material-ui
@@ -20,15 +20,10 @@ import { format, isSameDay, getYear, differenceInDays } from "date-fns/esm";
 const styles = theme => ({
   root: {
     width: "100%",
-    maxWidth: 1200,
-    margin: "0 auto",
-    marginTop: theme.spacing.unit * 2,
-    borderRadius: 8
+    marginBottom: theme.spacing.unit * 4
   },
   table: {
     // minWidth: 700,
-    borderRadius: 4,
-    marginBottom: theme.spacing.unit * 8
   },
   isMobile: {
     [theme.breakpoints.down("md")]: {
@@ -67,15 +62,10 @@ class GDDTable extends Component {
   };
   render() {
     const { classes } = this.props;
-    const {
-      dataForTable,
-      isLoading,
-      dateOfInterest,
-      missingDays
-    } = this.props.appStore.paramsStore;
+    const { isLoading, dateOfInterest } = this.props.appStore.paramsStore;
 
-    const { modelData } = this.props.appStore.currentModel;
-    console.log(modelData);
+    const { dataForTable, missingDays } = this.props.appStore.currentModel;
+
     const color = d => {
       if (d < 613) return "#44AA51";
       if (d >= 613 && d <= 863) return "#F6C317";
@@ -83,11 +73,15 @@ class GDDTable extends Component {
     };
 
     return (
-      <Fragment>
-        <Typography variant="headline" className={classes.root}>
-          Predictions
+      <div className={classes.root}>
+        <Typography
+          variant="subheading"
+          gutterBottom
+          style={{ letterSpacing: 1 }}
+        >
+          PREDICTIONS
         </Typography>
-        <Paper className={classes.root}>
+        <Paper>
           {isLoading ? (
             <div
               style={{
@@ -164,7 +158,7 @@ class GDDTable extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {modelData.map(o => {
+                {dataForTable.map(o => {
                   const isToday = isSameDay(new Date(dateOfInterest), o.date);
                   const formattedDate = format(o.date, "YYYY-MM-DD");
                   const formattedToday = format(new Date(), "YYYY-MM-DD");
@@ -274,7 +268,7 @@ class GDDTable extends Component {
               })}
             </Typography>
           )}
-      </Fragment>
+      </div>
     );
   }
 }

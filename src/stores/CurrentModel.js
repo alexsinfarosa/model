@@ -27,7 +27,7 @@ export default class CurrentModel {
       if (countMissingValues < 5) {
         const tempsFiltered = temps.filter(t => t !== "M");
         const min = Math.min(...tempsFiltered);
-        const max = Math.min(...tempsFiltered);
+        const max = Math.max(...tempsFiltered);
         const avg = (min + max) / 2;
 
         // calculate degree day
@@ -54,12 +54,17 @@ export default class CurrentModel {
   }
 
   get dataForTable() {
-    return this.modelData.slice(-6);
+    return this.modelData.slice(-8).map(d => d.p);
+  }
+
+  get missingDays() {
+    return this.modelData[0].missingDays;
   }
 }
 
 decorate(CurrentModel, {
   data: computed,
   modelData: computed,
-  dataForTable: computed
+  dataForTable: computed,
+  missingDays: computed
 });

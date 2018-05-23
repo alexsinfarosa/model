@@ -20,15 +20,10 @@ import { pestManagement } from "../assets/pestManagement";
 const styles = theme => ({
   root: {
     width: "100%",
-    maxWidth: 1200,
-    margin: "0 auto",
-    marginTop: theme.spacing.unit * 2,
-    borderRadius: 8
+    marginBottom: theme.spacing.unit * 4
   },
   table: {
-    // minWidth: 700,
-    borderRadius: 4,
-    marginBottom: theme.spacing.unit * 8
+    minWidth: 700
   },
   isMobile: {
     [theme.breakpoints.down("md")]: {
@@ -54,7 +49,7 @@ const styles = theme => ({
 class ManagementTable extends Component {
   render() {
     const { classes } = this.props;
-    const { dataForTable } = this.props.appStore.paramsStore;
+    const { dataForTable } = this.props.appStore.currentModel;
 
     let cdd;
     if (dataForTable) {
@@ -67,15 +62,19 @@ class ManagementTable extends Component {
     if (cdd > 964) status = pestManagement[3];
 
     return (
-      <Fragment>
+      <div className={classes.root}>
         {status ? (
           <div>
-            <Typography variant="headline" className={classes.root}>
-              Management
+            <Typography
+              variant="subheading"
+              gutterBottom
+              style={{ letterSpacing: 1 }}
+            >
+              MANAGEMENT
             </Typography>
             <Fragment>
               <Hidden only="xs">
-                <Paper className={classes.root}>
+                <Paper>
                   <Table className={classes.table}>
                     <TableHead>
                       <TableRow>
@@ -120,7 +119,7 @@ class ManagementTable extends Component {
               </Hidden>
 
               <Hidden smUp>
-                <Paper className={classes.root}>
+                <Paper>
                   <Table>
                     <TableHead>
                       <TableRow>
@@ -144,7 +143,7 @@ class ManagementTable extends Component {
               </Hidden>
 
               <Hidden smUp>
-                <Paper className={classes.root}>
+                <Paper>
                   <Table style={{ marginTop: 16, marginBottom: 32 }}>
                     <TableHead>
                       <TableRow>
@@ -168,7 +167,7 @@ class ManagementTable extends Component {
             </Fragment>
           </div>
         ) : null}
-      </Fragment>
+      </div>
     );
   }
 }
