@@ -169,14 +169,30 @@ class App extends Component {
               <div className={classes.toolbar} />
               {data.length !== 0 ? (
                 <div>
-                  <Typography
-                    variant="display1"
-                    align="center"
-                    gutterBottom
-                    style={{ marginTop: 16, marginBottom: 32 }}
-                  >
-                    Results for {station.name}, {station.state}
-                  </Typography>
+                  <Hidden only="xs">
+                    <Typography
+                      variant="display1"
+                      align="center"
+                      gutterBottom
+                      style={{ marginTop: 16, marginBottom: 32 }}
+                    >
+                      Results for {station.name}, {station.state}
+                    </Typography>
+                  </Hidden>
+                  <Hidden smUp>
+                    <Typography
+                      variant="display1"
+                      align="center"
+                      gutterBottom
+                      style={{
+                        marginTop: 16,
+                        marginBottom: 32,
+                        fontSize: "1.6rem"
+                      }}
+                    >
+                      Results for {station.name}, {station.state}
+                    </Typography>
+                  </Hidden>
                   <div style={{ flex: 1 }}>
                     <ManagementTable />
                     <GDDTable />
