@@ -30,7 +30,7 @@ export default (acisData, params) => {
   );
 
   // if date of interest is in current year
-  if (isSameYear(new Date(), new Date(params.dateOfInterest))) {
+  if (isSameYear(new Date(), params.dateOfInterest)) {
     const forecast = acisData.get("forecast");
     // dates = forecast.map(arr => arr[0]);
 

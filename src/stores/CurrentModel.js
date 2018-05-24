@@ -21,7 +21,7 @@ export default class CurrentModel {
     return this.data.map(obj => {
       const { date, temps } = obj;
       const countMissingValues = temps.filter(t => t === "M").length;
-      // console.log(countMissingValues);
+      // console.log(date, temps, countMissingValues);
       let p = {};
 
       if (countMissingValues < 5) {
