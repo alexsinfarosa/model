@@ -6,7 +6,13 @@ import axios from "axios";
 import { idAdjustment, vXDef } from "../utils/utils";
 
 // date-fns
-import { format, getYear, startOfHour, addDays } from "date-fns/esm";
+import {
+  format,
+  getYear,
+  startOfHour,
+  addDays,
+  isSameYear
+} from "date-fns/esm";
 
 // fetch
 import fetchData from "../utils/fetchData";
@@ -133,7 +139,8 @@ export default class ParamsStore {
         dateOfInterest: format(
           startOfHour(this.dateOfInterest),
           "YYYY-MM-DD HH:00"
-        )
+        ),
+        isThisYear: isSameYear(new Date(), this.dateOfInterest)
       };
     }
   }

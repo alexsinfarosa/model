@@ -38,11 +38,11 @@ export default class CurrentModel {
         cdd += dd;
 
         p["date"] = date;
-        p["min"] = min.toFixed(2);
-        p["max"] = max.toFixed(2);
-        p["avg"] = avg.toFixed(2);
-        p["dd"] = dd.toFixed(2);
-        p["cdd"] = cdd.toFixed(2);
+        p["min"] = min.toFixed(0);
+        p["max"] = max.toFixed(0);
+        p["avg"] = avg.toFixed(0);
+        p["dd"] = dd.toFixed(0);
+        p["cdd"] = cdd.toFixed(0);
       } else {
         missingDays.push(date);
         p["date"] = date;

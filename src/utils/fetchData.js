@@ -1,5 +1,5 @@
 import axios from "axios";
-import { format, isSameYear, addDays } from "date-fns/esm";
+import { format, addDays } from "date-fns/esm";
 import cleanFetchedData from "./cleanFetchedData";
 
 const protocol = window.location.protocol;
@@ -65,7 +65,7 @@ export default async params => {
   sisParams.sid = sisterStationIdAndNetwork;
   const sisterStation = await fetchSisterStationHourlyData(sisParams);
 
-  if (isSameYear(new Date(), params.dateOfInterest)) {
+  if (params.isThisYear) {
     // get forecast hourly data
     const forecastData = await fetchHourlyForcestData(params);
     results.set("forecast", forecastData.data);
