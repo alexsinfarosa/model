@@ -37,11 +37,11 @@ export default class CurrentModel {
         cdd += dd;
 
         p["date"] = date;
-        p["min"] = min.toFixed(0);
-        p["max"] = max.toFixed(0);
-        p["avg"] = avg.toFixed(0);
-        p["dd"] = dd.toFixed(0);
-        p["cdd"] = cdd.toFixed(0);
+        p["min"] = min.toFixed(1);
+        p["max"] = max.toFixed(1);
+        p["avg"] = avg.toFixed(1);
+        p["dd"] = dd.toFixed(1);
+        p["cdd"] = cdd.toFixed(1);
       } else {
         missingDays.push(date);
         p["date"] = date;
@@ -51,7 +51,7 @@ export default class CurrentModel {
         p["dd"] = "N/A";
         p["cdd"] = "N/A";
       }
-      // console.log(p, missingDays);
+      // console.log(p);
       return { p, missingDays };
     });
   }
