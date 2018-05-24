@@ -44,6 +44,23 @@ export default (acisData, params) => {
   // transforming data to local time
   // ////////////////////////////////////////////////////////////////////////////////////
 
+  // dates go from yyyy-01-01 to dateOfInterest (yyyy-mm-dd)
+  dates = dates.slice(1); // from Jan 1st
+
+  // hourlyDates go from yyyy-01-01 00:00 to dateOfInterest (yyyy-mm-dd 23:00)
+  const hourlyDates = dates
+    .map(date => dailyToHourlyDates(date))
+    .reduce((acc, results) => [...acc, ...results], []);
+
+  // array of indeces where the hour must be shifted
+  const arrOFIndeces = hourlyDates.map((hour, i) => {
+    const tzoFromDate = parseInt(format(new Date(hour), "Z"), 10);
+    return tzoFromDate !== tzo ? i : null;
+  });
+
+  // removing null values
+  const indices = arrOFIndeces.filter(d => d);
+
   // generating the array of objects
   const isModelBasedOnHourlyData = false;
   let results = [];
@@ -52,31 +69,18 @@ export default (acisData, params) => {
     // values go from yyyy-01-01 00:00 to dateOfInterest current hour
     values = [replaced[23], ...replaced.slice(24, -1)];
 
-    // dates go from yyyy-01-01 to dateOfInterest (yyyy-mm-dd)
-    dates = dates.slice(1); // from Jan 1st
-
-    // hourlyDates go from yyyy-01-01 00:00 to dateOfInterest (yyyy-mm-dd 23:00)
-    const hourlyDates = dates
-      .map(date => dailyToHourlyDates(date))
-      .reduce((acc, results) => [...acc, ...results], []);
-
-    // array of indeces where the hour must be shifted
-    const arrOFIndeces = hourlyDates.map((hour, i) => {
-      const tzoFromDate = parseInt(format(new Date(hour), "Z"), 10);
-      return tzoFromDate !== tzo ? i : null;
-    });
-
-    // removing null values
-    const indices = arrOFIndeces.filter(d => d);
-
     // the valuesShifted array has the hour shifted
     const valuesShifted = values.map(
       (v, i) => (v in indices ? values[i - 1] : v)
     );
+
     hourlyDates.forEach((hour, i) => {
       let p = {};
       p["date"] = new Date(hour);
       p["temp"] = valuesShifted[i];
+      // this is needed because we need to computed avg and dd alway on the original array
+      // and not the shifted array
+      // p["originalData"] = replaced.slice(24);
       results.push(p);
     });
   } else {
@@ -85,27 +89,11 @@ export default (acisData, params) => {
     // values go from yyyy-01-01 00:00 to dateOfInterest current hour
     values = [...replaced.slice(24)];
 
-    // dates go from yyyy-01-01 to dateOfInterest (yyyy-mm-dd)
-    dates = dates.slice(1); // from Jan 1st
-
-    // hourlyDates go from yyyy-01-01 00:00 to dateOfInterest (yyyy-mm-dd 23:00)
-    const hourlyDates = dates
-      .map(date => dailyToHourlyDates(date))
-      .reduce((acc, results) => [...acc, ...results], []);
-
-    // array of indeces where the hour must be shifted
-    const arrOFIndeces = hourlyDates.map((hour, i) => {
-      const tzoFromDate = parseInt(format(new Date(hour), "Z"), 10);
-      return tzoFromDate !== tzo ? i : null;
-    });
-
-    // removing null values
-    const indices = arrOFIndeces.filter(d => d);
-
     // the valuesShifted array has the hour shifted
     const valuesShifted = values.map(
       (v, i) => (v in indices ? values[i - 1] : v)
     );
+
     dates.forEach((date, i) => {
       const numOfHours = dailyToHourlyDatesLST(startOfDay(date), endOfDay(date))
         .length;
