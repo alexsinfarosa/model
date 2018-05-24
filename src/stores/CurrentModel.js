@@ -31,17 +31,18 @@ export default class CurrentModel {
         const avg = (min + max) / 2;
 
         // calculate degree day
+        // const dd = avg - base > 0 ? avg - base : 0;
         const dd = baskervilleEmin(min, max, base);
 
         // cumulative degree day
         cdd += dd;
 
         p["date"] = date;
-        p["min"] = min.toFixed(1);
-        p["max"] = max.toFixed(1);
-        p["avg"] = avg.toFixed(1);
-        p["dd"] = dd.toFixed(1);
-        p["cdd"] = cdd.toFixed(1);
+        p["min"] = min.toFixed(2);
+        p["max"] = max.toFixed(2);
+        p["avg"] = avg.toFixed(2);
+        p["dd"] = dd.toFixed(2);
+        p["cdd"] = cdd.toFixed(2);
       } else {
         missingDays.push(date);
         p["date"] = date;

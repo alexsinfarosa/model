@@ -2,7 +2,7 @@
   "name": "models",
   "version": "0.1.0",
   "author": "alexsinfarosa <as898@cornell.edu>",
-  "homepage": "https://alexsinfarosa.github.io/blueberry-maggot-model-new/",
+  "homepage": "https://alexsinfarosa.github.io/model/",
   "description": "NEWA Blueberry Maggot Model",
   "private": true,
   "dependencies": {
@@ -25,6 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
