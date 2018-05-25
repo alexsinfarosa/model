@@ -146,14 +146,13 @@ export default class ParamsStore {
   }
 
   // data model --------------------------------------------------------------------------------
-  data = {};
-  setData = d => (this.data = d);
+  data = [];
   missingDays = [];
   loadData = params => {
-    this.data = {};
+    this.data = [];
     this.isLoading = true;
     // fetching data
-    fetchData(params).then(res => this.setData(res));
+    fetchData(params).then(res => (this.data = res));
     this.isLoading = false;
   };
 }

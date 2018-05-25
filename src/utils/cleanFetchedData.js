@@ -61,38 +61,29 @@ export default (acisData, params) => {
   // removing null values
   const indices = arrOFIndeces.filter(d => d);
 
-  // hourly data ---------------------------------------------------------------
-  // values go from yyyy-01-01 00:00 to dateOfInterest current hour
-  const valuesShifted = [replaced[23], ...replaced.slice(24, -1)];
-
-  // the valuesShifted array has the hour shifted
-  const valuesShiftedLST = valuesShifted.map(
-    (v, i) => (v in indices ? valuesShifted[i - 1] : v)
-  );
+  // generating the array of objects
 
   let hourlyData = [];
-  hourlyDates.forEach((hour, i) => {
-    let p = {};
-    p["date"] = new Date(hour);
-    p["temp"] = valuesShifted[i];
-    // this is needed because we need to computed avg and dd alway on the original array
-    // and not the shifted array
-    // p["originalData"] = replaced.slice(24);
-    hourlyData.push(p);
-  });
+  let dailyData = [];
 
-  // daily data ----------------------------------------------------------------
+  // values go from yyyy-01-01 00:00 to dateOfInterest current hour
+  const valuesHourly = [replaced[23], ...replaced.slice(24, -1)];
+
+  // the valuesShifted array has the hour shifted
+  const valuesHourlyShifted = valuesHourly.map(
+    (v, i) => (v in indices ? valuesHourly[i - 1] : v)
+  );
+
   let left = 0;
   let right = 0;
   // values go from yyyy-01-01 00:00 to dateOfInterest current hour
-  const valuesOriginal = [...replaced.slice(24)];
+  const valuesDaily = [...replaced.slice(24)];
 
   // the valuesShifted array has the hour shifted
-  const valuesOriginalLST = valuesOriginal.map(
-    (v, i) => (v in indices ? valuesOriginal[i - 1] : v)
+  const valuesDailysShifted = valuesDaily.map(
+    (v, i) => (v in indices ? valuesDaily[i - 1] : v)
   );
 
-  let dailyData = [];
   dates.forEach((date, i) => {
     const numOfHours = dailyToHourlyDatesLST(startOfDay(date), endOfDay(date))
       .length;
@@ -101,12 +92,19 @@ export default (acisData, params) => {
 
     let p = {};
     p["date"] = date;
-    p["temps"] = valuesShifted.slice(left, right);
+    p["temps"] = valuesDailysShifted.slice(left, right);
 
     left += numOfHours;
     dailyData.push(p);
   });
 
-  console.log({ dailyData, hourlyData });
-  return { dailyData, hourlyData };
+  hourlyDates.forEach((hour, i) => {
+    let p = {};
+    p["date"] = new Date(hour);
+    p["temp"] = valuesHourlyShifted[i];
+    hourlyData.push(p);
+  });
+
+  // console.log(dailyData, hourlyData);
+  return [dailyData, hourlyData];
 };
