@@ -13,7 +13,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 8
   },
   header: {
-    borderBottom: `1px solid ${theme.palette.primary.light}`
+    borderBottom: `2px solid ${theme.palette.primary.light}`,
+    width: 250
   }
 });
 
