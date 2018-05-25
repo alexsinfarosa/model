@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { inject, observer } from "mobx-react";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -56,6 +56,8 @@ const styles = theme => ({
     }
   },
   content: {
+    display: "flex",
+    flexDirection: "column",
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 2,
@@ -161,60 +163,100 @@ class App extends Component {
         {/* main content */}
         {station && (
           <main className={classes.content}>
+            <div className={classes.toolbar} />
+
+            {isSeason && (
+              <div
+                style={{
+                  maxWidth: 1200,
+                  margin: "0 auto"
+                }}
+              >
+                <Hidden only="xs">
+                  <Typography
+                    variant="display1"
+                    align="center"
+                    gutterBottom
+                    style={{ marginTop: 16, marginBottom: 32 }}
+                  >
+                    Results for {station.name}, {station.state}
+                  </Typography>
+                </Hidden>
+                <Hidden smUp>
+                  <Typography
+                    variant="display1"
+                    align="center"
+                    gutterBottom
+                    style={{
+                      marginTop: 16,
+                      marginBottom: 32,
+                      fontSize: "1.6rem"
+                    }}
+                  >
+                    Results for {station.name}, {station.state}
+                  </Typography>
+                </Hidden>
+              </div>
+            )}
+
+            {isSeason ? (
+              <Fragment>
+                {data.length !== 0 ? (
+                  <div
+                    style={{
+                      maxWidth: 1200,
+                      margin: "0 auto",
+                      flexDirection: "column",
+                      flex: 1
+                    }}
+                  >
+                    <ManagementTable />
+                    <GDDTable />
+                    <Disclaimer />
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      maxWidth: 1200,
+                      margin: "0 auto",
+                      flex: 1
+                    }}
+                  >
+                    <Typography variant="caption">LOADING...</Typography>
+                    <RingLoader
+                      color={"#843EA4"}
+                      loading={this.state.loading}
+                    />
+                  </div>
+                )}
+              </Fragment>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  maxWidth: 1200,
+                  margin: "0 auto",
+                  flex: 1
+                }}
+              >
+                <OutOfSeasonMessage />
+              </div>
+            )}
+
             <div
               style={{
                 maxWidth: 1200,
                 margin: "0 auto"
               }}
             >
-              <div className={classes.toolbar} />
-              {data.length !== 0 ? (
-                <div>
-                  {isSeason ? (
-                    <div>
-                      <Hidden only="xs">
-                        <Typography
-                          variant="display1"
-                          align="center"
-                          gutterBottom
-                          style={{ marginTop: 16, marginBottom: 32 }}
-                        >
-                          Results for {station.name}, {station.state}
-                        </Typography>
-                      </Hidden>
-                      <Hidden smUp>
-                        <Typography
-                          variant="display1"
-                          align="center"
-                          gutterBottom
-                          style={{
-                            marginTop: 16,
-                            marginBottom: 32,
-                            fontSize: "1.6rem"
-                          }}
-                        >
-                          Results for {station.name}, {station.state}
-                        </Typography>
-                      </Hidden>
-                      <div style={{ flex: 1 }}>
-                        <ManagementTable />
-                        <GDDTable />
-                        <Disclaimer />
-                      </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <OutOfSeasonMessage />
-                    </div>
-                  )}
-                  <Footer />
-                </div>
-              ) : (
-                <div className={classes.centered}>
-                  <Typography variant="caption">LOADING...</Typography>
-                  <RingLoader color={"#843EA4"} loading={this.state.loading} />
-                </div>
-              )}
+              <Footer />
             </div>
           </main>
         )}

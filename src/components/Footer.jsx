@@ -66,15 +66,15 @@ class Footer extends Component {
             className={classes.footer}
             style={{ flexDirection: "column", margin: 0, padding: 0 }}
           >
-            <Typography variant="caption">
+            <Typography variant="caption" gutterBottom>
               <Button className={classes.button}>MORE INFO</Button>
             </Typography>
-            <Typography variant="caption">
+            <Typography variant="caption" gutterBottom>
               <Button className={classes.button} onClick={this.toggleModal}>
                 ACKNOWLEDGMENT
               </Button>
             </Typography>
-            <Typography variant="caption">
+            <Typography variant="caption" gutterBottom>
               <Button
                 className={classes.button}
                 href="http://newa.cornell.edu/"

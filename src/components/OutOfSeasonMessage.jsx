@@ -8,9 +8,12 @@ import Typography from "@material-ui/core/Typography";
 const styles = theme => ({
   root: {
     width: "100%",
-    maxWidth: 700,
+    maxWidth: 500,
     margin: "0 auto",
     marginBottom: theme.spacing.unit * 8
+  },
+  header: {
+    borderBottom: `1px solid ${theme.palette.primary.light}`
   }
 });
 
@@ -19,17 +22,28 @@ class OutOfSeasonMessage extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant="caption" paragraph align="justify">
+        <Typography
+          variant="subheading"
+          paragraph
+          align="justify"
+          className={classes.header}
+        >
           PEST STATUS
         </Typography>
-        <Typography variant="caption" paragraph align="justify">
+        <Typography variant="body1" paragraph align="justify">
           Blueberry maggot is overwintering as pupae in the soil.
         </Typography>
 
-        <Typography variant="caption" paragraph align="justify">
+        <Typography
+          variant="subheading"
+          paragraph
+          align="justify"
+          style={{ marginTop: 64 }}
+          className={classes.header}
+        >
           PEST MANAGEMENT
         </Typography>
-        <Typography variant="caption" paragraph align="justify">
+        <Typography variant="body1" paragraph align="justify">
           The time of concern for blueberry maggot has passed. The blueberry
           maggot tool will begin again on March 1.{" "}
         </Typography>
