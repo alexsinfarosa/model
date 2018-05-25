@@ -102,8 +102,8 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     const { station } = this.props.appStore.paramsStore;
-    const { data } = this.props.appStore.currentModel;
-
+    const { dailyData } = this.props.appStore.currentModel;
+    console.log(dailyData);
     return (
       <div className={classes.root}>
         <AppBar className={classes.appBar}>
@@ -167,7 +167,7 @@ class App extends Component {
               }}
             >
               <div className={classes.toolbar} />
-              {data.length !== 0 ? (
+              {dailyData.length !== 0 ? (
                 <div>
                   <Hidden only="xs">
                     <Typography

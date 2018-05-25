@@ -1,4 +1,4 @@
-import { decorate, computed } from "mobx";
+import { decorate, computed, toJS } from "mobx";
 import { baskervilleEmin } from "../utils/utils";
 import { format } from "date-fns/esm";
 
@@ -9,16 +9,26 @@ export default class CurrentModel {
   }
 
   // data from paramsStore -------------------------------------------------------
-  get data() {
-    return this.paramsStore.data;
+  get dailyData() {
+    console.log(Object.keys(this.paramsStore.data).length !== 0);
+    if (Object.keys(this.paramsStore.data).length !== 0) {
+      console.log(this.paramsStore);
+      console.log(toJS(this.paramsStore.data));
+      return this.paramsStore.data.dailyData;
+    }
+  }
+
+  get hourlyData() {
+    return this.paramsStore.data.hourlyData;
   }
 
   // current model ---------------------------------------------------------------
   get modelData() {
+    console.log(this.dailyData);
     const base = 50;
     let cdd = 0;
     let missingDays = [];
-    return this.data.map(obj => {
+    return this.dailyData.map(obj => {
       const { date, temps } = obj;
       const countMissingValues = temps.filter(t => t === "M").length;
       // console.log(date, temps, countMissingValues);
@@ -77,7 +87,8 @@ export default class CurrentModel {
 }
 
 decorate(CurrentModel, {
-  data: computed,
+  hourlyData: computed,
+  dailyData: computed,
   modelData: computed,
   dataForTable: computed,
   missingDays: computed
