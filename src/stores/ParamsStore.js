@@ -7,6 +7,8 @@ import { idAdjustment, vXDef } from "../utils/utils";
 
 // date-fns
 import {
+  isAfter,
+  isBefore,
   format,
   getYear,
   startOfHour,
@@ -95,7 +97,7 @@ export default class ParamsStore {
   };
 
   //   date of interest -------------------------------------------------------------------
-  dateOfInterest = new Date();
+  dateOfInterest = new Date("2018-02-14");
   get sdate() {
     return `${getYear(this.dateOfInterest) - 1}-12-31`;
   }
@@ -145,6 +147,19 @@ export default class ParamsStore {
     }
   }
 
+  get isSeason() {
+    return (
+      isAfter(
+        this.dateOfInterest,
+        new Date(`${getYear(this.dateOfInterest)}-03-01`)
+      ) &&
+      isBefore(
+        this.dateOfInterest,
+        new Date(`${getYear(this.dateOfInterest)}-09-01`)
+      )
+    );
+  }
+
   // data model --------------------------------------------------------------------------------
   data = [];
   missingDays = [];
@@ -177,5 +192,6 @@ decorate(ParamsStore, {
   setStateStationFromMap: action,
   data: observable,
   missingDays: observable,
-  setData: action
+  setData: action,
+  isSeason: computed
 });
