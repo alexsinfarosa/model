@@ -11,7 +11,7 @@
 5.  Tap '`add`' at the top right corner of the screen
 6.  A new icon should have been added to the `HOME` screen
 7.  Tap the new icon to lunch the app
-8.  You should always use the new app to lunch the application instead of navigating to the site
+8.  You should always use the app to lunch the application instead of the browser
 
 ##### On Android
 
