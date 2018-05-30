@@ -1,11 +1,11 @@
 # NEWA Blueberry Maggot Model
 
-#### For better experience on mobile divices follow these instructions
+#### For a better experience on mobile divices follow these instructions
 
 ##### On IOS
 
 1.  Go to the site: [link](https://alexsinfarosa.github.io/blueberry-maggot-model-new/)
-2.  Click the <img src="https://png.icons8.com/ios/16/000000/level-up.png"> icon at the bottom of the screen
+2.  Click the <img src="https://png.icons8.com/ios/18/000000/level-up.png"> icon at the bottom of the screen
 3.  click on the '`Add to Home Screen`' icon
 4.  Give it a name (optional)
 5.  Click '`add`' on the top right corner of the screen
