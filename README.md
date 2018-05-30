@@ -1,7 +1,5 @@
 # NEWA Blueberry Maggot Model
 
----
-
 #### For better experience on mobile divices follow these instructions
 
 ##### On IOS
