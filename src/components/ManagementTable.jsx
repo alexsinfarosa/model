@@ -56,10 +56,10 @@ class ManagementTable extends Component {
       cdd = dataForTable[2].cdd;
     }
     let status;
-    if (cdd <= 613) status = pestManagement[0];
-    if (cdd > 613) status = pestManagement[1];
-    if (cdd > 863) status = pestManagement[2];
-    if (cdd > 964) status = pestManagement[3];
+    if (cdd <= 613) status = pestManagement[1];
+    if (cdd > 613 && cdd <= 863) status = pestManagement[2];
+    if (cdd > 863 && cdd <= 963) status = pestManagement[3];
+    if (cdd > 964) status = pestManagement[4];
 
     return (
       <div className={classes.root}>
