@@ -12,6 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Hidden from "@material-ui/core/Hidden";
 
 // date
 import { format, isSameDay, differenceInDays } from "date-fns/esm";
@@ -49,6 +50,18 @@ const styles = theme => ({
     maxWidth: 1200,
     margin: "0 auto",
     marginTop: theme.spacing.unit * 1
+  },
+  segment: {
+    width: 110,
+    textAlign: "center",
+    borderRadius: 8,
+    padding: 2,
+    "& > *": {
+      color: "white",
+      fontWeight: 700,
+      letterSpacing: 1,
+      fontSize: 10
+    }
   }
 });
 
@@ -245,6 +258,30 @@ class GDDTable extends Component {
             </Table>
           )}
         </Paper>
+
+        <Hidden smUp>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: 32
+            }}
+          >
+            <div className={classes.segment} style={{ background: "#44AA51" }}>
+              <Typography variant="caption">LOW</Typography>
+              <Typography variant="caption">&lt;613</Typography>
+            </div>
+            <div className={classes.segment} style={{ background: "#F6C317" }}>
+              <Typography variant="caption">MODERATE</Typography>
+              <Typography variant="caption">&ge;613 and &le;863</Typography>
+            </div>
+            <div className={classes.segment} style={{ background: "#E0413D" }}>
+              <Typography variant="caption">HIGH</Typography>
+              <Typography variant="caption">&gt;863</Typography>
+            </div>
+          </div>
+        </Hidden>
+
         {/* Missing Days */}
         {missingDays.length !== 0 &&
           !isLoading && (

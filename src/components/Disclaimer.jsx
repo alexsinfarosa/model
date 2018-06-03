@@ -10,8 +10,8 @@ const styles = theme => ({
     width: "100%",
     maxWidth: 700,
     margin: "0 auto",
-    marginBottom: theme.spacing.unit * 8,
-    marginTop: theme.spacing.unit * 8
+    marginBottom: theme.spacing.unit * 6,
+    marginTop: theme.spacing.unit * 4
   }
 });
 

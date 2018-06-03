@@ -35,9 +35,9 @@ export default (acisData, params) => {
     const forecastValues = flatten(forecast.map(arr => arr[1]));
 
     // replace missing values with forecast data
-    replaced = replaced.map(
-      (t, i) => (t === "M" ? forecastValues[i].toString() : t)
-    );
+    replaced = replaced.map((t, i) => {
+      return t === "M" ? forecastValues[i].toString() : t;
+    });
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////
