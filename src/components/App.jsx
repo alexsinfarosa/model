@@ -262,12 +262,12 @@ class App extends Component {
             }}
           >
             <Hidden smUp>
-              <Typography variant="heading">
+              <Typography variant="subheading">
                 TAP THE &equiv; ICON TO MAKE A SELECTION
               </Typography>
             </Hidden>
             <Hidden only="xs">
-              <Typography variant="heading">
+              <Typography variant="subheading">
                 MAKE A SELECTION FROM THE LEFT PANEL
               </Typography>
             </Hidden>
