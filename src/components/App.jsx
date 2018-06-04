@@ -161,17 +161,20 @@ class App extends Component {
         </Hidden>
 
         {/* main content */}
-        {station && (
-          <main className={classes.content}>
+        {station ? (
+          <main
+            className={classes.content}
+            style={{
+              maxWidth: 1200,
+              margin: "0 auto",
+              flex: 1,
+              flexDirection: "column"
+            }}
+          >
             <div className={classes.toolbar} />
 
             {isSeason && (
-              <div
-                style={{
-                  maxWidth: 1200,
-                  margin: "0 auto"
-                }}
-              >
+              <div>
                 <Hidden only="xs">
                   <Typography
                     variant="display1"
@@ -204,9 +207,6 @@ class App extends Component {
                 {data.length !== 0 ? (
                   <div
                     style={{
-                      maxWidth: 1200,
-                      margin: "0 auto",
-                      flexDirection: "column",
                       flex: 1
                     }}
                   >
@@ -221,8 +221,6 @@ class App extends Component {
                       flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",
-                      maxWidth: 1200,
-                      margin: "0 auto",
                       flex: 1
                     }}
                   >
@@ -241,8 +239,7 @@ class App extends Component {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  maxWidth: 1200,
-                  margin: "0 auto",
+
                   flex: 1
                 }}
               >
@@ -250,14 +247,30 @@ class App extends Component {
               </div>
             )}
 
-            <div
-              style={{
-                maxWidth: 1200,
-                margin: "0 auto"
-              }}
-            >
+            <div>
               <Footer />
             </div>
+          </main>
+        ) : (
+          <main
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              flex: 1
+            }}
+          >
+            <Hidden smUp>
+              <Typography variant="heading">
+                TAP THE &equiv; ICON TO MAKE A SELECTION
+              </Typography>
+            </Hidden>
+            <Hidden only="xs">
+              <Typography variant="heading">
+                MAKE A SELECTION FROM THE LEFT PANEL
+              </Typography>
+            </Hidden>
           </main>
         )}
 

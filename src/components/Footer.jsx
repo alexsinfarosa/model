@@ -16,9 +16,6 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     height: 150,
-    // background: "white",
-    margin: 0,
-    padding: 0,
     borderTop: "1px solid #E7E7E7"
   },
   button: {
@@ -42,7 +39,7 @@ class Footer extends Component {
       <Fragment>
         <Hidden only="xs">
           <div className={classes.footer}>
-            <Typography variant="caption" style={{ margin: 0, padding: 0 }}>
+            <Typography variant="caption">
               <Button className={classes.button}>MORE INFO</Button>
               <span> | </span>
               <Button className={classes.button} onClick={this.toggleModal}>
@@ -62,19 +59,21 @@ class Footer extends Component {
         </Hidden>
 
         <Hidden smUp>
-          <div
-            className={classes.footer}
-            style={{ flexDirection: "column", margin: 0, padding: 0 }}
-          >
-            <Typography variant="caption" gutterBottom>
+          <div className={classes.footer} style={{ flexDirection: "column" }}>
+            <Typography
+              variant="caption"
+              gutterBottom
+              align="center"
+              style={{ marginTop: 24 }}
+            >
               <Button className={classes.button}>MORE INFO</Button>
             </Typography>
-            <Typography variant="caption" gutterBottom>
+            <Typography variant="caption" gutterBottom align="center">
               <Button className={classes.button} onClick={this.toggleModal}>
                 ACKNOWLEDGMENT
               </Button>
             </Typography>
-            <Typography variant="caption" gutterBottom>
+            <Typography variant="caption" gutterBottom align="center">
               <Button
                 className={classes.button}
                 href="http://newa.cornell.edu/"
