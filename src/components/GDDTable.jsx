@@ -49,7 +49,7 @@ const styles = theme => ({
     width: "100%",
     maxWidth: 1200,
     margin: "0 auto",
-    marginTop: theme.spacing.unit * 1
+    marginTop: theme.spacing.unit * 3
   },
   segment: {
     width: 110,
@@ -286,10 +286,10 @@ class GDDTable extends Component {
         {missingDays.length !== 0 &&
           !isLoading && (
             <Typography variant="caption" className={classes.missingDays}>
-              {`(+${missingDays.length}) ${
+              <span style={{ color: "black" }}>{`(+${missingDays.length}) ${
                 missingDays.length === 1 ? "day" : "days"
               } missing:
-                  `}
+                  `}</span>
               {missingDays.map((d, i) => {
                 if (i === missingDays.length - 1) {
                   return <span key={d}>{format(d, "MMMM Do")}.</span>;
