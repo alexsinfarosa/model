@@ -20,7 +20,8 @@ export default (acisData, params) => {
     flatten(currentStn.map(arr => arr[1]))
   );
 
-  let replaced;
+  let replaced = currentStnValues;
+
   // sister station
   const sisterStn = acisData.get("sisterStn");
   if (sisterStn) {
@@ -28,9 +29,7 @@ export default (acisData, params) => {
     const sisterStnValues = flatten(sisterStn.map(arr => arr[1]));
 
     // replace current station values with sister station's
-    replaced = currentStnValues.map(
-      (t, i) => (t === "M" ? sisterStnValues[i] : t)
-    );
+    replaced = replaced.map((t, i) => (t === "M" ? sisterStnValues[i] : t));
   }
 
   // if date of interest is in current year
@@ -39,15 +38,9 @@ export default (acisData, params) => {
     const forecastValues = flatten(forecast.map(arr => arr[1]));
 
     // replace missing values with forecast data
-    if (!replaced) {
-      replaced = currentStnValues.map(
-        (t, i) => (t === "M" ? forecastValues[i].toString() : t)
-      );
-    } else {
-      replaced = replaced.map(
-        (t, i) => (t === "M" ? forecastValues[i].toString() : t)
-      );
-    }
+    replaced = replaced.map(
+      (t, i) => (t === "M" ? forecastValues[i].toString() : t)
+    );
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////

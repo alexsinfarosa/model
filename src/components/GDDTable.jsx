@@ -212,7 +212,7 @@ class GDDTable extends Component {
                           fontWeight: isToday ? 700 : 400,
                           background: color(o.cdd),
                           letterSpacing: 1,
-                          color: "#fff"
+                          color: o.cdd === "N/A" ? "black" : "#fff"
                         }}
                         className={classes.tableCell}
                         numeric

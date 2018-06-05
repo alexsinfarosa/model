@@ -156,7 +156,7 @@ export default class ParamsStore {
       ) &&
       isBefore(
         this.dateOfInterest,
-        new Date(`${getYear(this.dateOfInterest)}-09-01`)
+        new Date(`${getYear(this.dateOfInterest)}-10-01`)
       )
     );
   }

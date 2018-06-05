@@ -120,7 +120,7 @@ class App extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" style={{ color: "#fff" }}>
-              Blueberry Maggot Forecast Models
+              Blueberry Maggot Degree Day Model
             </Typography>
           </Toolbar>
         </AppBar>
