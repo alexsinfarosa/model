@@ -15,7 +15,7 @@
 
 ##### Android
 
-- Go to the site: [link](https://alexsinfarosa.github.io/blueberry-maggot-model-new/)
+- Go to the site: [link](https://alexsinfarosa.github.io/blueberry-maggot-model/)
 - Tap the <img src="https://png.icons8.com/material/18/000000/menu-2.png"> icon at the top right corner of the screen
 - Tap the '`Add Home Screen`' icon
 - Give it a name (optional)
