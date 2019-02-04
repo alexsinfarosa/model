@@ -2,7 +2,7 @@
   "name": "models",
   "version": "0.1.0",
   "author": "alexsinfarosa <as898@cornell.edu>",
-  "homepage": "http://bbm.newa.cornell.edu/",
+  "homepage": "https://alexsinfarosa.github.io/blueberry-maggot-model/",
   "description": "NEWA Blueberry Maggot Model",
   "private": true,
   "dependencies": {
