@@ -27,16 +27,17 @@ const styles = theme => ({
     // minWidth: 700,
   },
   isMobile: {
+    fontSize: "1rem",
     [theme.breakpoints.down("md")]: {
       display: "none"
     }
   },
   tableCell: {
-    fontSize: "0.8rem",
+    fontSize: "1rem",
     padding: "0 10px",
     textAlign: "center",
     "@media (min-width: 576px)": {
-      fontSize: "0.8rem"
+      fontSize: "1rem"
     }
   },
   tableHeader: {
@@ -87,12 +88,8 @@ class GDDTable extends Component {
 
     return (
       <div className={classes.root}>
-        <Typography
-          variant="subheading"
-          gutterBottom
-          style={{ letterSpacing: 1 }}
-        >
-          PREDICTIONS
+        <Typography variant="headline" gutterBottom>
+          Predictions
         </Typography>
         <Paper>
           {isLoading ? (
@@ -118,49 +115,51 @@ class GDDTable extends Component {
                       textAlign: "center",
                       margin: 0,
                       padding: 0,
-                      borderRight: "1px solid #E0E0E0"
+                      borderRight: "1px solid #E0E0E0",
+                      fontSize: "1rem"
                     }}
                   >
-                    <div>DATE</div>
+                    Date
                   </TableCell>
                   <TableCell
                     style={{
                       textAlign: "center",
                       borderLeft: "1px solid #E0E0E0",
-                      borderRight: "1px solid #E0E0E0"
+                      borderRight: "1px solid #E0E0E0",
+                      fontSize: "1rem"
                     }}
                     colSpan={2}
                   >
-                    <div>DEGREE DAYS (BASE 50 ˚F) BE</div>
+                    Degree Days (Base 50 ˚F BE)
                   </TableCell>
                   <TableCell
                     className={classes.isMobile}
-                    style={{ textAlign: "center" }}
+                    style={{ textAlign: "center", fontSize: "1rem" }}
                     colSpan={3}
                   >
-                    TEMPERATURE (˚F)
+                    Temperature (˚F)
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell className={classes.tableCell} numeric>
-                    DAILY
+                    Daily
                   </TableCell>
                   <TableCell
                     className={classes.tableCell}
                     style={{ borderRight: "1px solid #E0E0E0" }}
                     numeric
                   >
-                    FROM JAN 1st
+                    From Jan 1st
                   </TableCell>
                   <TableCell className={classes.isMobile} numeric>
-                    MIN
+                    Min
                   </TableCell>
                   <TableCell className={classes.isMobile} numeric>
-                    AVG
+                    Avg
                   </TableCell>
                   <TableCell className={classes.isMobile} numeric>
-                    MAX
+                    Max
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -283,22 +282,21 @@ class GDDTable extends Component {
         </Hidden>
 
         {/* Missing Days */}
-        {missingDays.length !== 0 &&
-          !isLoading && (
-            <Typography variant="caption" className={classes.missingDays}>
-              <span style={{ color: "black" }}>{`(+${missingDays.length}) ${
-                missingDays.length === 1 ? "day" : "days"
-              } missing:
+        {missingDays.length !== 0 && !isLoading && (
+          <Typography variant="caption" className={classes.missingDays}>
+            <span style={{ color: "black" }}>{`(+${missingDays.length}) ${
+              missingDays.length === 1 ? "day" : "days"
+            } missing:
                   `}</span>
-              {missingDays.map((d, i) => {
-                if (i === missingDays.length - 1) {
-                  return <span key={d}>{format(d, "MMMM Do")}.</span>;
-                } else {
-                  return <span key={d}>{format(d, "MMMM Do")}, </span>;
-                }
-              })}
-            </Typography>
-          )}
+            {missingDays.map((d, i) => {
+              if (i === missingDays.length - 1) {
+                return <span key={d}>{format(d, "MMMM Do")}.</span>;
+              } else {
+                return <span key={d}>{format(d, "MMMM Do")}, </span>;
+              }
+            })}
+          </Typography>
+        )}
       </div>
     );
   }

@@ -201,27 +201,39 @@ class LeftPanel extends Component {
               className={classes.riskLevel}
               style={{ background: "#44AA51" }}
             >
-              <Typography variant="caption">LOW</Typography>
+              <Typography variant="caption" style={{ color: "#000" }}>
+                LOW
+              </Typography>
             </div>
-            <Typography variant="caption">&lt;613</Typography>
+            <Typography variant="caption" style={{ color: "#000" }}>
+              &lt;613
+            </Typography>
           </div>
           <div className={classes.styledBtn}>
             <div
               className={classes.riskLevel}
               style={{ background: "#F6C317" }}
             >
-              <Typography variant="caption">MODERATE</Typography>
+              <Typography variant="caption" style={{ color: "#000" }}>
+                MODERATE
+              </Typography>
             </div>
-            <Typography variant="caption">&ge;613 and &le;863</Typography>
+            <Typography variant="caption" style={{ color: "#000" }}>
+              &ge;613 and &le;863
+            </Typography>
           </div>
           <div className={classes.styledBtn}>
             <div
               className={classes.riskLevel}
               style={{ background: "#E0413D" }}
             >
-              <Typography variant="caption">HIGH</Typography>
+              <Typography variant="caption" style={{ color: "#000" }}>
+                HIGH
+              </Typography>
             </div>
-            <Typography variant="caption">&gt;863</Typography>
+            <Typography variant="caption" style={{ color: "#000" }}>
+              &gt;863
+            </Typography>
           </div>
         </form>
       </Fragment>

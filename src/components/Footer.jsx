@@ -9,6 +9,7 @@ import Modal from "@material-ui/core/Modal";
 import Hidden from "@material-ui/core/Hidden";
 
 import Acknowledgment from "./Acknowledgment";
+import MoreInfo from "./MoreInfo";
 
 const styles = theme => ({
   footer: {
@@ -26,11 +27,16 @@ const styles = theme => ({
 });
 class Footer extends Component {
   state = {
-    isModal: false
+    isModalA: false,
+    isModalM: false
   };
 
-  toggleModal = () => {
-    this.setState({ isModal: !this.state.isModal });
+  toggleModalA = () => {
+    this.setState({ isModalA: !this.state.isModalA });
+  };
+
+  toggleModalM = () => {
+    this.setState({ isModalM: !this.state.isModalM });
   };
 
   render() {
@@ -40,9 +46,11 @@ class Footer extends Component {
         <Hidden only="xs">
           <div className={classes.footer}>
             <Typography variant="caption">
-              <Button className={classes.button}>MORE INFO</Button>
+              <Button className={classes.button} onClick={this.toggleModalM}>
+                MORE INFO
+              </Button>
               <span> | </span>
-              <Button className={classes.button} onClick={this.toggleModal}>
+              <Button className={classes.button} onClick={this.toggleModalA}>
                 ACKNOWLEDGMENT
               </Button>
               <span> | </span>
@@ -66,10 +74,12 @@ class Footer extends Component {
               align="center"
               style={{ marginTop: 24 }}
             >
-              <Button className={classes.button}>MORE INFO</Button>
+              <Button className={classes.button} onClick={this.toggleModalM}>
+                MORE INFO
+              </Button>
             </Typography>
             <Typography variant="caption" gutterBottom align="center">
-              <Button className={classes.button} onClick={this.toggleModal}>
+              <Button className={classes.button} onClick={this.toggleModalA}>
                 ACKNOWLEDGMENT
               </Button>
             </Typography>
@@ -91,8 +101,8 @@ class Footer extends Component {
           aria-labelledby="Acknowledgment"
           aria-describedby="Acknowledgment"
           disableAutoFocus={true}
-          open={this.state.isModal}
-          onClose={this.toggleModal}
+          open={this.state.isModalA}
+          onClose={this.toggleModalA}
           style={{
             width: "100%",
             height: "50%",
@@ -109,6 +119,32 @@ class Footer extends Component {
             }}
           >
             <Acknowledgment />
+          </div>
+        </Modal>
+
+        {/* More Info */}
+        <Modal
+          aria-labelledby="MoreInfo"
+          aria-describedby="MoreInfo"
+          disableAutoFocus={true}
+          open={this.state.isModalM}
+          onClose={this.toggleModalM}
+          style={{
+            width: "100%",
+            height: "50%",
+            margin: "100px auto"
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <MoreInfo />
           </div>
         </Modal>
       </Fragment>

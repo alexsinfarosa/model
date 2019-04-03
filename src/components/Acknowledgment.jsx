@@ -19,29 +19,15 @@ class Acknowledgment extends Component {
     return (
       <div style={{ width: 500 }}>
         <Paper className={classes.root} elevation={4}>
-          <Typography variant="headline" component="h3">
-            ACKNOWLEDGMENT
+          <Typography paragraph>
+            The blueberry maggot degree day model is based on a model from
+            Michigan State University, Rufus Isaacs and Carlos Garcia.
           </Typography>
-          <br />
-          <Typography component="p">
-            New York State Integrated Pest Management -{" "}
-            <a
-              href="https://nysipm.cornell.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              NYSIPM
-            </a>
-          </Typography>
-          <Typography component="p">
-            Northeast Regional Climate Center -{" "}
-            <a
-              href="http://www.nrcc.cornell.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              NRCC
-            </a>
+
+          <Typography paragraph>
+            The NEWA tool was built by Juliet Carroll and Greg Loeb, Cornell
+            University, with input from Dean Polk, Rutgers University, and
+            Hannah Burrack, North Carolina State University.
           </Typography>
         </Paper>
       </div>

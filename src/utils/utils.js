@@ -190,7 +190,7 @@ export const unflatten = array => {
 
 // Convert Fahrenheit to Celcius
 export const fahrenheitToCelcius = (t, missing) =>
-  t === missing ? t : ((t - 32) * 5 / 9).toFixed(1);
+  t === missing ? t : (((t - 32) * 5) / 9).toFixed(1);
 
 // Convert Celcius to Fahrenheit
 export const celciusToFahrenheit = (t, missing) =>
@@ -235,17 +235,14 @@ export const dailyToHourlyDates = date => {
 
 // This formula is used to calculate the growing degree day
 export const baskervilleEmin = (min, max, base) => {
+  const avg = (max + min) / 2;
   if (min >= base) {
-    const avg = (max + min) / 2;
     return avg - base;
   } else if (max <= base) {
     return 0;
   } else {
-    const avg = (max + min) / 2;
     const amt = (max - min) / 2;
     const t1 = Math.sin((base - avg) / amt);
-    return avg < 0
-      ? 0
-      : (amt * Math.cos(t1) - (base - avg) * (3.14 / 2 - t1)) / 3.14;
+    return (amt * Math.cos(t1) - (base - avg) * (3.14 / 2 - t1)) / 3.14;
   }
 };

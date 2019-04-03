@@ -5,6 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
 import Typography from "@material-ui/core/Typography";
 
+import NEWALogo from "../assets/newa-logo.svg";
+
 const styles = theme => ({
   root: {
     width: "100%",
@@ -35,6 +37,9 @@ class Disclaimer extends Component {
           observations of plant growth stage, pest presence, and disease
           occurrence determined through scouting or insect pheromone traps.
         </Typography>
+
+        <br />
+        <img src={NEWALogo} alt="NEWA logo" style={{ height: 50 }} />
       </div>
     );
   }

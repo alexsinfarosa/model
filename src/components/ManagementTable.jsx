@@ -65,12 +65,8 @@ class ManagementTable extends Component {
       <div className={classes.root}>
         {status ? (
           <div>
-            <Typography
-              variant="subheading"
-              gutterBottom
-              style={{ letterSpacing: 1 }}
-            >
-              MANAGEMENT
+            <Typography variant="headline" gutterBottom>
+              Management
             </Typography>
             <Fragment>
               <Hidden only="xs">
@@ -85,29 +81,41 @@ class ManagementTable extends Component {
                             textAlign: "center",
                             margin: 0,
                             padding: 0,
-                            borderRight: "1px solid #E0E0E0"
+                            borderRight: "1px solid #E0E0E0",
+                            fontSize: "1rem"
                           }}
                         >
-                          <div>PEST STATUS</div>
+                          Pest Status
                         </TableCell>
                         <TableCell
                           style={{
                             textAlign: "center",
                             borderLeft: "1px solid #E0E0E0",
-                            borderRight: "1px solid #E0E0E0"
+                            borderRight: "1px solid #E0E0E0",
+                            fontSize: "1rem"
                           }}
-                          // colSpan={2}
                         >
-                          <div>PEST MANAGEMENT</div>
+                          Pest Management
                         </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       <TableRow hover>
-                        <TableCell>{status.status}</TableCell>
                         <TableCell
                           style={{
-                            borderLeft: "1px solid #E0E0E0"
+                            fontSize: "0.9rem",
+                            lineHeight: 1.5,
+                            padding: 16
+                          }}
+                        >
+                          {status.status}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            borderLeft: "1px solid #E0E0E0",
+                            fontSize: "0.9rem",
+                            lineHeight: 1.5,
+                            padding: 16
                           }}
                         >
                           {status.management}
@@ -135,7 +143,11 @@ class ManagementTable extends Component {
                     </TableHead>
                     <TableBody>
                       <TableRow hover>
-                        <TableCell>{status.status}</TableCell>
+                        <TableCell
+                          style={{ fontSize: "0.8rem", lineHeight: 1.5 }}
+                        >
+                          {status.status}
+                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -158,7 +170,11 @@ class ManagementTable extends Component {
                     </TableHead>
                     <TableBody>
                       <TableRow hover>
-                        <TableCell>{status.management}</TableCell>
+                        <TableCell
+                          style={{ fontSize: "0.8rem", lineHeight: 1.5 }}
+                        >
+                          {status.management}
+                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>

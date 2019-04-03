@@ -40,8 +40,8 @@ export default class CurrentModel {
 
         // calculate degree day
         // const dd = avg - base > 0 ? avg - base : 0;
-        const dd = baskervilleEmin(min, max, base);
-
+        let dd = baskervilleEmin(min, max, base);
+        if (dd < 0) dd = 0;
         // cumulative degree day
         cdd += dd;
 
