@@ -12,7 +12,8 @@ export const pestManagement = [
     dd: 613,
     status:
       "Blueberry maggot is overwintering as pupae in the soil. Predicted first emergence of blueberry maggot occurs after approximately 913 degree days have accumulated from January 1.",
-    management: "No control measures are recommended at this time."
+    management:
+      "Order yellow sticky board traps and ammonium acetate baits to monitor for blueberry maggot flies. About 1 trap per 2 acres to a maximum of 20 traps. Traps and baits are replaced every third week during the fruiting season. "
   },
   {
     stage: "Start monitoring",
@@ -20,7 +21,7 @@ export const pestManagement = [
     status:
       "Blueberry maggot flies usually emerge first in unsprayed blueberries or abandoned plantings.",
     management:
-      "Set baited traps to monitor for first emergence of blueberry maggot adults on field edges or in abandoned plantings. Check traps twice per week."
+      "Set baited traps on field edges or in abandoned plantings to monitor for blueberry maggot adults. Use yellow sticky boards baited with ammonium acetate enhancers as a food attractant. Check traps once or twice per week, as required, and replace traps and baits every third week."
   },
   {
     stage: "BBM emergence",
@@ -28,14 +29,14 @@ export const pestManagement = [
     status:
       "First emergence of blueberry maggot is predicted to occur at around 913 degree days.",
     management:
-      "Continue to check blueberry traps twice per week. If caught, begin insecticide treatment. "
+      "Set baited traps on field edges or in abandoned plantings to monitor for blueberry maggot adults. Use yellow sticky boards baited with ammonium acetate enhancers as a food attractant. Continue to check blueberry traps once or twice per week, as required, and replace traps and baits every third week. If caught, begin insecticide treatment to protect the crop, according to your market requirements. "
   },
   {
     stage: "BBM IPM program underway",
     dd: 964,
     status:
-      "First emergence of blueberry maggot is predicted to occur at around 913 degree days. Blueberry maggot flight is underway and the crop is at risk from egg-laying females.",
+      "First emergence of blueberry maggot is predicted to occur at around 913 degree days. Blueberry maggot flight places the crop at risk from egg-laying females.",
     management:
-      "Continue to check blueberry traps twice per week. If caught, begin insecticide treatment. Maintain an IPM and insecticide program to protect the crop, according to your market requirements."
+      "Continue to check blueberry traps once or twice per week, as required, and replace traps and baits every third week. If caught, begin insecticide treatment. Maintain an IPM and insecticide program to protect the crop, according to your market requirements."
   }
 ];

@@ -104,7 +104,7 @@ class ManagementTable extends Component {
                         <TableCell
                           style={{
                             fontSize: "0.9rem",
-                            lineHeight: 1.5,
+                            lineHeight: 1.7,
                             padding: 16
                           }}
                         >
@@ -114,7 +114,7 @@ class ManagementTable extends Component {
                           style={{
                             borderLeft: "1px solid #E0E0E0",
                             fontSize: "0.9rem",
-                            lineHeight: 1.5,
+                            lineHeight: 1.7,
                             padding: 16
                           }}
                         >
