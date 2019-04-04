@@ -82,7 +82,8 @@ class ManagementTable extends Component {
                             margin: 0,
                             padding: 0,
                             borderRight: "1px solid #E0E0E0",
-                            fontSize: "1rem"
+                            fontSize: "1rem",
+                            color: "rgba(0,0,0,0.9)"
                           }}
                         >
                           Pest Status
@@ -92,7 +93,8 @@ class ManagementTable extends Component {
                             textAlign: "center",
                             borderLeft: "1px solid #E0E0E0",
                             borderRight: "1px solid #E0E0E0",
-                            fontSize: "1rem"
+                            fontSize: "1rem",
+                            color: "rgba(0,0,0,0.9)"
                           }}
                         >
                           Pest Management

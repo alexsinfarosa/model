@@ -180,7 +180,7 @@ class App extends Component {
                     variant="display1"
                     align="center"
                     gutterBottom
-                    style={{ marginTop: 16, marginBottom: 32 }}
+                    style={{ marginTop: 16, marginBottom: 32, color: "#000" }}
                   >
                     Results for {station.name}, {station.state}
                   </Typography>

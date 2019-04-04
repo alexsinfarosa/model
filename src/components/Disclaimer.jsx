@@ -22,14 +22,24 @@ class Disclaimer extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant="caption" paragraph align="justify">
+        <Typography
+          variant="caption"
+          paragraph
+          align="justify"
+          style={{ color: "rgba(0,0,0,0.9)", lineHeight: 1.7 }}
+        >
           Blueberry maggot emergence is predicted to occur when approximately
           <b> 913 degree days, base 50 ˚F</b>, have accumulated from January
           1st. The blueberry maggot degree day model uses the Baskerville Emin
           formula.
         </Typography>
 
-        <Typography variant="caption" paragraph align="justify">
+        <Typography
+          variant="caption"
+          paragraph
+          align="justify"
+          style={{ color: "rgba(0,0,0,0.9)", lineHeight: 1.7 }}
+        >
           <b>Disclaimer: These are theoretical predictions and forecasts.</b>The
           theoretical models predicting pest development or disease risk use the
           weather data collected (or forecasted) from the weather station

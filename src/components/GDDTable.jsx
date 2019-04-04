@@ -28,16 +28,20 @@ const styles = theme => ({
   },
   isMobile: {
     fontSize: "1rem",
+    color: "rgba(0,0,0,0.9)",
     [theme.breakpoints.down("md")]: {
-      display: "none"
+      display: "none",
+      color: "rgba(0,0,0,0.9)"
     }
   },
   tableCell: {
     fontSize: "1rem",
     padding: "0 10px",
     textAlign: "center",
+    color: "rgba(0,0,0,0.9)",
     "@media (min-width: 576px)": {
-      fontSize: "1rem"
+      fontSize: "1rem",
+      color: "rgba(0,0,0,0.9)"
     }
   },
   tableHeader: {
@@ -57,6 +61,7 @@ const styles = theme => ({
     textAlign: "center",
     borderRadius: 8,
     padding: 2,
+    color: "rgba(0,0,0,0.9)",
     "& > *": {
       color: "white",
       fontWeight: 700,
@@ -116,7 +121,8 @@ class GDDTable extends Component {
                       margin: 0,
                       padding: 0,
                       borderRight: "1px solid #E0E0E0",
-                      fontSize: "1rem"
+                      fontSize: "1rem",
+                      color: "rgba(0,0,0,0.9)"
                     }}
                   >
                     Date
@@ -126,7 +132,8 @@ class GDDTable extends Component {
                       textAlign: "center",
                       borderLeft: "1px solid #E0E0E0",
                       borderRight: "1px solid #E0E0E0",
-                      fontSize: "1rem"
+                      fontSize: "1rem",
+                      color: "rgba(0,0,0,0.9)"
                     }}
                     colSpan={2}
                   >
@@ -134,7 +141,11 @@ class GDDTable extends Component {
                   </TableCell>
                   <TableCell
                     className={classes.isMobile}
-                    style={{ textAlign: "center", fontSize: "1rem" }}
+                    style={{
+                      textAlign: "center",
+                      fontSize: "1rem",
+                      color: "rgba(0,0,0,0.9)"
+                    }}
                     colSpan={3}
                   >
                     Temperature (˚F)
