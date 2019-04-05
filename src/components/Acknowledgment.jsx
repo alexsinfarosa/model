@@ -25,9 +25,11 @@ class Acknowledgment extends Component {
           </Typography>
 
           <Typography paragraph>
-            The NEWA tool was built by Juliet Carroll and Greg Loeb, Cornell
-            University, with input from Dean Polk, Rutgers University, and
-            Hannah Burrack, North Carolina State University.
+            The NEWA tool was built by{" "}
+            <a href="mailto:jec3@cornell.edu">Juliet Carroll</a> and{" "}
+            <a href="mailto:gme1@cornell.edu">Greg Loeb</a>, Cornell University,
+            with input from Dean Polk, Rutgers University, and Hannah Burrack,
+            North Carolina State University.
           </Typography>
         </Paper>
       </div>
