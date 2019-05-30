@@ -19,18 +19,23 @@ class MoreInfo extends Component {
     return (
       <div style={{ width: 500 }}>
         <Paper className={classes.root} elevation={4}>
-          <Typography variant="subheading" gutterBottom>
-            Do you have a blueberry maggot problem?
-          </Typography>
-
           <p>
-            Follow this link:{" "}
             <a
               href="https://cpb-us-e1.wpmucdn.com/blogs.cornell.edu/dist/0/7265/files/2017/01/bbmaggotfly-1v17esy.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >
-              blogs.cornell.edu
+              Do you have a blueberry maggot problem?
+            </a>
+          </p>
+
+          <p>
+            <a
+              href="http://newa.cornell.edu/uploads/documents/BlueberryCertificationProgram_forBBMmodelNEWA.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              IPM Option – Blueberry Certification Program
             </a>
           </p>
         </Paper>
