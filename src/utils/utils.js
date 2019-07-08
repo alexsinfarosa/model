@@ -26,6 +26,7 @@ export const matchIconsToStations = (station, state) => {
     network === "miwx" ||
     network === "oardc" ||
     network === "nysm" ||
+    network === "nwon" ||
     ((network === "cu_log" || network === "culog") && station.state !== "NY")
   ) {
     return station.state === postalCode || postalCode === "ALL"

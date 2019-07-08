@@ -37,6 +37,9 @@ class USMap extends Component {
 
     const stationsWithMatchedIcons = stations.map(station => {
       station["icon"] = matchIconsToStations(station, state);
+      // if (station.icon === undefined) {
+      //   console.log(station.id, station.network, station.icon);
+      // }
       return station;
     });
 
